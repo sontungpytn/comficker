@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+{% load custom_tags %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/{{ name }}">{{ name }}</a></li>
+	<li>{{ model.name }}</li>
+{% endblock %}
+{% load i18n %}
+{% block title %}{{ model.name }}{% endblock %}
+{% block description %}This page showing all of {{ model.name }}'s information include {% get_meta_description fields %}{% endblock %}
+{% block content_header %}<h1 class="page-title">{{ model.name }}</h1>{% endblock %}
+{% block content %}
+	<section class="model">{% if model.gallery is not None %}
+		<div id="model_gallery">
+			<swiper :options="swiperOption">{% for gallery in model.gallery.list_images %}
+				<swiper-slide class="slide-1">
+					<img src="{{ gallery.image.path.crop.400x400 }}"/>
+				</swiper-slide>{% endfor %}
+				<div class="swiper-pagination" slot="pagination"></div>
+				<div class="swiper-button-prev" slot="button-prev"></div>
+				<div class="swiper-button-next" slot="button-next"></div>
+			</swiper>
+		</div>{% endif %}
+		<div class="small-12">
+			<table class="table table-hover table-fixed">
+				<thead>
+				<tr>
+					<th scope="col" colspan="3">{{ model.name }}'s information</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="field-data text-left" colspan="3">{% get_description properties=model.properties %}</td>
+					</tr>{% for class in classes %}{% for field in fields %}{% if field.classify.id == class.id %}
+					<tr>
+						<th colspan="2">{{ field }}</th>
+					</tr>{% for property in model.properties %}{% if property.active and property.sub_class == field.name and property.name != "Description" %}
+					<tr>
+						<th scope="row" class="field-title text-right" width="120">{{ property.name }}</th>
+						<td class="field-data text-left">{% if property.type == "image" %}
+							<a href="{{ property.data.full_size|safe }}" data-fancybox data-caption="{{ model.name }}'s {{ property.name }}">
+								<img src="{{ property.data.medium_square_crop|safe }}">
+							</a>{% elif property.type == "list" %}{% for text in property.data %}
+							<a class="label clickable" href="/{{ name }}/filter/{{ property.name | slugify }}/{{ text | half_slug }}">
+								<span>{{ text|safe }}</span>
+							</a>{% endfor %}{% elif property.type == "tag" %}
+							<a href="/{{ name }}/filter/{{ property.name | slugify }}/{{ property.data | half_slug }}">
+								<span>{{ property.data|safe }}</span>
+							</a>{% else %}
+							{{ property.data|safe }}{% endif %}
+						</td>
+					</tr>{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
+				<tr id="action_like">
+					<th>Vote</th>
+					<td>
+						<like :name="'{{ name }}'" :slug="'{{ model.slug }}'"></like>
+					</td>
+				</tr>{% if model.user.id == user.id %}
+					<tr>
+						<td colspan="2">
+							<a class="button small-8" href='edit'>Edit</a>
+							<a class="button small-4" href='delete'>Delete</a>
+						</td>
+					</tr>{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</section>{% endblock %}

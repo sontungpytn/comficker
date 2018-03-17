@@ -1,0 +1,26 @@
+{% extends "media/media_show.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li><a href="/media/{{ image.slug }}">{{ image.title }}</a></li>
+	<li>Edit</li>
+{% endblock %}
+{% load i18n %}
+{% block title %}Edit image: {{ image.title }}{% endblock %}
+{% block content_header %}<h1 class="page-title">Edit media</h1>{% endblock %}
+{% block content %}
+	<section class="row">
+		<form method="post" action="" class="row small-up-1 medium-up-2 large-up-2 small-12 card-list">
+			<div class="column column-block">
+				<img src="{{ image.path.crop.400x400 }}" class="thumbnail"/>
+			</div>
+			<div class="column column-block">{% csrf_token %}
+				<label>Title</label>{{ form.title }}{% for error in form.title.errors %}
+					<div class="form-control-feedback">{{ error }}</div>{% endfor %}
+				<label>Description</label>{{ form.description }}{% for error in form.description.errors %}
+					<div class="form-control-feedback">{{ error }}</div>{% endfor %}
+				<input type="submit" class="button" value="{% trans 'Submit' %}"/>
+			</div>
+		</form>
+	</section>
+{% endblock %}

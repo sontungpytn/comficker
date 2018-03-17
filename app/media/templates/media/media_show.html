@@ -1,0 +1,55 @@
+{% extends "media_index.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li>{{ image.title }}</li>
+{% endblock %}
+{% load i18n %}
+{% block title %}Photo: {{ image.title }}{% endblock %}
+{% block content_header %}<h1 class="page-title">{{ image.title }}</h1>{% endblock %}
+{% block content %}
+	<section>
+		<div class="small-12 media">
+			<div class="showcase">
+				<img src="/media/{{ image.path }}" alt="{{ image.title }}">{% if image.user.id == user.id %}
+				<div class="control">
+					<a class="button small" href='{{ image.id }}/edit'>
+						<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Edit
+					</a>
+					<a class="button small" href='{{ image.id }}/delete'>
+						<i class='fa fa-trash' aria-hidden='true'></i> Delete
+					</a>
+				</div>{% endif %}
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block sidebar %}
+	<section class="widget first">
+		<div class="wrap">
+			<table class="table">
+				<tr><th colspan="2">File information</th></tr>
+				<tr>
+					<th class="text-right">Name</th>
+					<td>{{ image.title }}</td>
+				</tr>
+				<tr>
+					<th class="text-right">Description</th>
+					<td>{{ image.description }}</td>
+				</tr>
+				<tr>
+					<th class="text-right">Size</th>
+					<td>{{ image.path.size }} Kb</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+	<section class="widget">
+		<div class="wrap">
+			<div class="widget-body">
+				<a class="button expanded" href="/media/all">All Media</a>
+				<a class="button expanded" href="/media/gallery">Gallery</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}

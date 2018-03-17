@@ -1,0 +1,40 @@
+{% extends "layout/base.html" %}
+{% load custom_tags %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li>User</li>
+{% endblock %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ user }}{% endblock %}
+{% block content_header %}<h1 class="page-title">Members</h1>{% endblock %}
+{% block content %}
+	<section class="row small-12 account-information">
+		<div class="row small-12">
+			<div class="column small-4">
+				<img alt="{{ user }}" src="{% if user.profile.image is None %}{% static 'img/avatar.png' %}"{% else %}
+					{{ user.profile.image.crop.175x175 }}{% endif %}">
+			</div>
+			<div class="column small-8">
+				<h2>
+					{% if user.last_name is None %}{{ user }}{% else %}{{ user.first_name }}
+						{{ user.last_name }}{% endif %}
+				</h2>
+				<p class="bio">{{ user.profile.extra.bio }}</p>
+			</div>
+		</div>
+	</section>
+	<section class="small-12 account-post">{% for category in categories %}
+		<div class="small-12">
+			<h2>{{ category.name }}</h2>{% for post in category.posts %}
+			<div class="small-12">
+				<h3 class="review-title"><a href="/{{ category.name | slugify }}/{{ post.slug }}">{{ post }}</a></h3>
+				<div>
+					<p>{% get_description post.properties %}</p>
+				</div>
+			</div>{% endfor %}
+		</div>{% endfor %}
+	</section>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "media_index.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li><a href="/media/{{ model.slug }}">{{ model.title }}</a></li>
+	<li>Confirm</li>
+{% endblock %}
+{% load static %}
+{% block title %}Confirm to delete "{{ model.title }}"{% endblock %}
+{% block content_header %}<h1 class="page-title">Confirm to delete "{{ model.title }}"</h1>{% endblock %}
+{% block content %}
+	<section>
+		<form method="POST" action="">
+			{% csrf_token %}
+			<button class="button">Delete</button>
+		</form>
+	</section>{% endblock %}
+{% block script %}
+{% endblock %}

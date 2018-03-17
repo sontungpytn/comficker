@@ -1,0 +1,25 @@
+{% extends "layout/base.html" %}
+{% load i18n %}
+{% block content %}
+	<section>
+		<h1>Login</h1>
+		<div class="row align-center">
+			<form method="post" action="."  class="column small-12 large-8">
+				<fieldset>
+					{% csrf_token %}
+						<label for="exampleInputEmail1">Username</label>
+						<input type="text" class="form-control" id="id_username" aria-describedby="emailHelp"
+						       placeholder="Enter email" name="username">
+						<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+							else.
+						</small>
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password" class="form-control" id="id_password" placeholder="Password"
+						       name="password">
+				</fieldset>
+				<input type="submit" class="button" value="{% trans 'Log in' %}"/>
+				<input type="hidden" name="next" value="{{ next }}"/>
+			</form>
+		</div>
+	</section>
+{% endblock %}

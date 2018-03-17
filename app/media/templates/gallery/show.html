@@ -1,0 +1,42 @@
+{% extends 'gallery/index.html' %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li><a href="/media/gallery">Gallery</a></li>
+	<li>{{ gallery.title }}</li>
+{% endblock %}
+{% load static %}
+{% block content_header %}<h1 class="page-title">{{ gallery.title }}</h1>{% endblock %}
+{% block content %}
+	<section class="gallery_info">
+		<div class="small-12">
+			<h2>Description</h2>
+			<p>{{ gallery.description }}</p>{% if gallery.user.id == user.id %}
+			<div class="media_edit_button">
+				<a class="button" href='{{ gallery.slug }}/delete'>
+					<i class='fa fa-trash' aria-hidden='true'></i> Delete
+				</a>
+				<a class="button" href='{{ gallery.slug }}/edit'>
+					<i class='fa fa-pencil-square-o' aria-hidden='true'></i> Edit
+				</a>
+			</div>{% endif %}
+		</div>
+	</section>
+	<section class="gallery_media row">
+		<div class="small-12">
+			<h2>Photos</h2>
+		</div>
+		<div class="list-model row small-up-2 medium-up-3 large-up-3 small-12">{% for photo in photos %}
+			<div class="column column-block model">
+				<div class="featured-image">
+					<img src="{{ photo.image.path.crop.400x400 }}" alt="{{ photo.image.title }}">
+				</div>
+				<div class="caption">
+					<h3 class="model_title">
+						<a href="/media/{{ photo.image.id }}">{{ photo.image.title }}</a>
+					</h3>
+				</div>
+			</div>{% endfor %}
+		</div>
+	</section>
+{% endblock %}

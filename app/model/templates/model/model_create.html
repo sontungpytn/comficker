@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/{{ name }}">{{ name }}</a></li>
+	<li>Add new</li>
+{% endblock %}
+{% load static %}
+{% block title %}Add {{ name }}{% endblock %}
+{% block content_header %}<h1 class="page-title">Add {{ name }}</h1>{% endblock %}
+{% block content %}<section>
+                        <div id="model_handle">
+                            <model-handle :model_name="'{{ name }}'" :action="'create'"></model-handle>
+                        </div>
+                    </section>{% endblock %}
+{% block script %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "model/model_classify.html" %}
+{% load custom_tags %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/{{ name }}">{{ name }}</a></li>
+	<li><a href="/{{ name }}/filter">Filter</a></li>
+	<li>{{ classify_name | title }}</li>
+{% endblock %}
+{% load i18n %}
+{% block title %}{{ name | title }} filter by {{ classify_name }}{% endblock %}
+{% block content_header %}<h1 class="page-title">Filter {{ name }} by {{ classify_name }}</h1>{% endblock %}
+{% block content %}
+	<section>
+		<div class="small-12">
+			<div class="row small-up-3 medium-up-4 large-up-4 small-12 tag-list">{% for object in object_list %}
+				<div class="column column-block tag-item">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+					<a class=""
+					   href="/{{ name }}/filter/{{ classify_name | slugify }}/{{ object | half_slug }}">{{ object }}</a>
+				</div>{% endfor %}
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block menu %}{% endblock %}

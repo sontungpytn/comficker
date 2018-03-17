@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Something wrong!{% endblock %}
+
+{% block content %}
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Warning!</h4>
+        <p class="mb-0">{{ message }}</p>
+        <p><a href="/" class="btn btn-primary">Go to Homepage</a></p>
+    </div>
+{% endblock %}

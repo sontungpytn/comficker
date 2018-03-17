@@ -1,0 +1,16 @@
+<ul class="pagination" role="navigation" aria-label="Pagination">{% if pages.has_previous %}
+    <li class="page-item">
+        <a class="pagination-previous" href="?page={{ pages.previous_page_number }}">previous</a>
+    </li>{% else %}
+    <li class="pagination-previous disabled">previous</li>{% endif %}{% for i in pages.paginator.page_range %}{% if pages.number == i %}
+    <li class="current">
+        {{ i }}
+    </li>{% else %}
+    <li class="disabled">
+        <a href="?page={{ i }}">{{ i }}</a>
+    </li>{% endif %}{% endfor %}{% if pages.has_next %}
+    <li>
+        <a href="?page={{ pages.next_page_number }}">next</a>
+    </li>{% else %}
+    <li class="pagination-next disabled">next</li>{% endif %}
+</ul>

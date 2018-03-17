@@ -1,0 +1,19 @@
+{% extends "model/model_show.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/{{ name }}">{{ name }}</a></li>
+	<li><a href="/{{ name }}/{{ model.slug }}">{{ model.name }}</a></li>
+	<li>Confirm Delete</li>
+{% endblock %}
+{% load static %}
+{% block title %}Confirm to delete "{{ model.name }}"{% endblock %}
+{% block content_header %}<h1 class="page-title">Confirm to delete "{{ model.name }}"</h1>{% endblock %}
+{% block content %}
+	<section>
+		<form method="POST" action="">
+			{% csrf_token %}
+			<button class="button">Delete</button>
+		</form>
+	</section>{% endblock %}
+{% block script %}
+{% endblock %}

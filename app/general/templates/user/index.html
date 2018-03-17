@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li>User</li>
+{% endblock %}
+{% load i18n %}
+{% load static %}
+{% block title %}Members{% endblock %}
+{% block content_header %}<h1 class="page-title">Members</h1>{% endblock %}
+{% block content %}
+	<section class="media row">
+		<div class="list-model row small-up-2 medium-up-3 large-up-3 small-12">{% for user in users %}
+			<div class="column column-block model">
+				<div class="featured-image">
+					<img src="{% if user.profile.image is None %}{% static 'img/avatar.png' %}" alt="{{ user }}{% else %}{{ user.profile.image.crop.175x175 }}{% endif %}">
+				</div>
+				<div class="caption">
+					<h2 class="model_title">
+						<a href="/member/{{ user.id }}">{% if user.last_name is None %}{{ user }}{% else %}{{ user.first_name }} {{ user.last_name }}{% endif %}</a>
+					</h2>
+				</div>
+			</div>{% endfor %}
+		</div>
+		<div class="small-12">
+            {% include "layout/pagination.html" with pages=galleries %}
+        </div>
+	</section>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}

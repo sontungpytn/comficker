@@ -1,0 +1,27 @@
+{% extends "layout/base.html" %}
+{% block breadcrumb %}
+	<li>Home</li>{% endblock %}
+{% block title %}Compargram.com - Compare everything{% endblock %}
+{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block content %}
+	<section>
+		<div class="grid-x card-list">
+			{% for content in contents %}
+			<div class="small-12 margin-bottom-10">
+				<div class="wrap">
+					<div class="grid-x">
+						<div class="small-4 medium-2 cell card-icon">
+							<img src="{{ content.image.crop.80x80 }}">
+						</div>
+						<div class="auto cell card-body">
+							<a href="/{{ content.slug }}">
+								<span class="card-title">{{ content.name }}</span>
+							</a>
+							<div class="card-desc">{{ content.description }}</div>
+						</div>
+					</div>
+				</div>
+			</div>{% endfor %}
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+{% load custom_tags %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/{{ name }}">{{ name }}</a></li>
+	<li><a href="/{{ name }}/filter">Filter</a></li>
+	<li><a href="/{{ name }}/filter/{{ classify_name | slugify }}">{{ classify_name | title }}</a></li>
+	<li>{{ classify_value }}</li>
+{% endblock %}
+{% load i18n %}
+{% block title %}List {{ name }} have {{ classify_name | lower }} is {{ classify_value | lower }}{% endblock %}
+{% block content_header %}<h1 class="page-title">List {{ name }} have {{ classify_name | lower }} is {{ classify_value | lower }}</h1>{% endblock %}
+{% block content %}
+	<section>
+		<div class="row small-12">{% for object in object_list %}
+			<div class="object grid-x grid-margin-x small-12">
+				<div class="featured-image small-4 cell">{% if object.gallery is not None %}
+					<img alt="{{ object.name }}" src="{{ object.gallery.featured.path.crop.400x400 }}"/>{% endif %}
+				</div>
+				<div class="caption auto cell">
+					<h2 class="model_title"><a href="/{{ name }}/{{ object.slug }}">{{ object.name }}</a></h2>
+					<p>{% get_description object.properties %}</p>
+				</div>
+			</div>{% endfor %}
+		</div>
+		<div class="small-12">
+            {% include "layout/pagination.html" with pages=object_list %}
+        </div>
+	</section>
+{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block menu %}{% endblock %}

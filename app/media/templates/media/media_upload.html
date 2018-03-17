@@ -1,0 +1,13 @@
+{% extends "media_index.html" %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li>Upload</li>
+{% endblock %}
+{% load static %}
+{% block content_header %}<h1 class="page-title">Upload photo</h1>{% endblock %}
+{% block content %}<section class="media-box">
+                        <div id="upload"></div>
+                    </section>{% endblock %}
+{% block script %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'gallery/show.html' %}
+{% block breadcrumb %}
+	<li><a href="/">Home</a></li>
+	<li><a href="/media">Media</a></li>
+	<li><a href="/media/gallery">Gallery</a></li>
+	<li><a href="/media/gallery/{{ gallery.slug }}">{{ gallery.title }}</a></li>
+	<li>Edit</li>
+{% endblock %}
+{% load static %}
+{% block content_header %}<h1 class="page-title">Edit gallery</h1>{% endblock %}
+{% block content %}
+	<section>
+		<div class="media-box">
+			<div id="gallery_edit"></div>
+		</div>
+		<div id="data" data="{{ gallery.id }}"></div>
+	</section>
+{% endblock %}
