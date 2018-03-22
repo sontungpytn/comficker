@@ -38,13 +38,13 @@ urlpatterns = [
     url(r'^$', views.welcome, name='home'),
     url(r'^api/', include(router.urls)),
     url(r'^member/', include('registration.backends.hmac.urls')),
-    url(r'^member/', include('app.general.user_urls', namespace='user')),
+    url(r'^member/', include(('app.general.user_urls', 'member'), namespace='user')),
     url(r'^admin/', admin.site.urls),
-    url(r'^food/', include('app.model_food.urls', namespace='food')),
-    url(r'^vehicle/', include('app.model_vehicle.urls', namespace='vehicle')),
-    url(r'^people/', include('app.model_people.urls', namespace='people')),
-    url(r'^media/', include('app.media.urls', namespace='media')),
-    url(r'^api/photos/', include("app.media.api.urls", namespace='images-api')),
+    url(r'^food/', include(('app.model_food.urls', 'food'), namespace='food')),
+    url(r'^vehicle/', include(('app.model_vehicle.urls', 'vehicle'), namespace='vehicle')),
+    url(r'^people/', include(('app.model_people.urls', 'people'), namespace='people')),
+    url(r'^media/', include(('app.media.urls', 'media'), namespace='media')),
+    url(r'^api/photos/', include(('app.media.api.urls', 'media'), namespace='images-api')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

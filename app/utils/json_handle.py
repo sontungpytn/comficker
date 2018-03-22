@@ -7,7 +7,7 @@ def is_json(myjson):
             return False
         else:
             json_object = json.loads(myjson)
-    except ValueError, e:
+    except ValueError:
         return False
     return True
 

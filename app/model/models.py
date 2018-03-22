@@ -76,3 +76,7 @@ class Review(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Compare(models.Model):
+    pass

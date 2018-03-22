@@ -46,7 +46,7 @@ class Image(models.Model):
 class Gallery(models.Model):
     title = models.CharField(max_length=160, unique=True)
     description = models.TextField(null=True)
-    featured = models.ForeignKey(Image)
+    featured = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True)
     slug = models.CharField(max_length=160, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')

@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import View
 from django.utils.text import slugify
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 
 class GenericModelView(View):
