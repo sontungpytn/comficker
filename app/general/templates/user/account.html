@@ -1,5 +1,4 @@
 {% extends "layout/base.html" %}
-{% load custom_tags %}
 {% block breadcrumb %}
 	<li><a href="/">Home</a></li>
 	<li>User</li>
@@ -23,17 +22,6 @@
 				<p class="bio">{{ user.profile.extra.bio }}</p>
 			</div>
 		</div>
-	</section>
-	<section class="small-12 account-post">{% for category in categories %}
-		<div class="small-12">
-			<h2>{{ category.name }}</h2>{% for post in category.posts %}
-			<div class="small-12">
-				<h3 class="review-title"><a href="/{{ category.name | slugify }}/{{ post.slug }}">{{ post }}</a></h3>
-				<div>
-					<p>{% get_description post.properties %}</p>
-				</div>
-			</div>{% endfor %}
-		</div>{% endfor %}
 	</section>
 {% endblock %}
 {% block sidebar %}

@@ -1,0 +1,46 @@
+{% extends "layout/base.html" %}
+{% block breadcrumb %}
+    <li>Home</li>{% endblock %}
+{% block title %}{{ classify.name }}s Compare{% endblock %}
+{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
+    information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block content %}
+    <div>
+        <h1 class="page-title site-title text-center">
+            {{ classify.name }}s Compare
+        </h1>
+        <section class="compare-search">
+            <div class="input-group">
+                <input class="input-group-field first" type="text" placeholder="You">
+                <span class="input-group-label"> vs </span>
+                <input class="input-group-field last" type="text" placeholder="Me">
+            </div>
+            <p class="text-center">
+                <button class="button button-compare">Compare</button>
+            </p>
+        </section>
+        <section>
+            <h2 class="text-center">New compare</h2>
+            <div class="row small-up-2 medium-up-3 large-up-4 small-12 compare-list">
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+                          <span class="model-icon"><img
+                                        src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-banana">Apple
+                                and Banana</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-banana">See compare</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,99 +1,68 @@
 <!doctype html>
 <html lang="en">
-<head>{% load static %}{% load custom_tags %}
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>{% block title %}{% endblock %} | Compargram.com</title>
-	<meta name="description" content="{% block description %}{% endblock %}">
-	<link rel="icon" type="image/png" href="/media/favicon-32x32.png" sizes="32x32"/>
-	<link rel="icon" type="image/png" href="/media/favicon-16x16.png" sizes="16x16"/>
-	<link rel="icon" type="image/png" href="/media/favicon.ico"/>
-	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-	<link href="{% static 'css/app.5795462b2137527eed8ff326d797ccd4.css' %}" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"/>
-	{% block style %}{% endblock %}
+<head>{% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} | Compargram.com</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <link rel="icon" type="image/png" href="/media/favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="{% static 'css/app.8c6e7ba63cb001aff295de2a174049ff.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css"/>
+    {% block style %}{% endblock %}
 </head>
 <body>
 <div id="main-site" class="wrapper off-canvas-content" data-off-canvas-content>
-	<header>
-		<div class="inner">
-			<div class="logo">
-				<a href="/">Compargram<span>.com</span></a>
-			</div>
-			<div class="responsive-menu" data-responsive-toggle="example-menu" data-hide-for="medium">
-				<button class="menu-icon" type="button" data-toggle="example-menu"></button>
-			</div>
-			<nav class="top-bar" data-responsive-menu="accordion medium-dropdown" id="example-menu">
-				<ul class="vertical medium-horizontal menu top-bar-left"
-				    data-responsive-menu="accordion medium-dropdown">
-					<li>
-						<a href="#">Compare</a>{% get_contents as contents %}
-						<ul class="vertical menu is-dropdown-submenu">{% for content in contents %}
-							<li><a href="/{{ content.slug }}">{{ content.name }}</a></li>{% endfor %}
-						</ul>
-					</li>
-					<li><a href="/media">Media</a></li>
-					<li><a href="/member">Member</a></li>
-				</ul>
-				<ul class="vertical medium-horizontal menu top-bar-right"
-				    data-responsive-menu="accordion medium-dropdown">
-					<li>
-						<a href="" class="account">Account</a>
-						<ul class="vertical menu is-dropdown-submenu">{% if not request.user.is_authenticated %}
-							<li><a href='/member/register/'>Register</a></li>
-							<li><a href='/member/login/'>Login</a></li>{% else %}
-							<li><a href="/member/{{ request.user.id }}">Welcome {{ request.user }}</a></li>
-							<li><a href="/member/logout/">Logout</a></li>{% endif %}
-						</ul>
-					</li>
-				</ul>
-			</nav>
+    <header>
+        <div class="inner">
+            <div class="logo">
+                <a href="/">Compargram<span>.com</span></a>
+            </div>
+            <div class="responsive-menu" data-responsive-toggle="example-menu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+            </div>
+            <nav class="top-bar" data-responsive-menu="accordion medium-dropdown" id="example-menu">
+                <ul class="vertical medium-horizontal menu top-bar-left"
+                    data-responsive-menu="accordion medium-dropdown">
+                    <li><a href="/member">Member</a></li>
+                    <li><a href="/member">Member</a></li>
+                </ul>
+                <ul class="vertical medium-horizontal menu top-bar-right"
+                    data-responsive-menu="accordion medium-dropdown">
+                    <li>
+                        <a href="" class="account">Account</a>
+                        <ul class="vertical menu is-dropdown-submenu">{% if not request.user.is_authenticated %}
+                            <li><a href='/member/register/'>Register</a></li>
+                            <li><a href='/member/login/'>Login</a></li>{% else %}
+                            <li><a href="/member/{{ request.user.id }}">Welcome {{ request.user }}</a></li>
+                            <li><a href="/member/logout/">Logout</a></li>{% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="inner">
+            {% block content_header %}{% endblock %}
+            {% block content %}{% endblock %}
 		</div>
-	</header>
-	<main>
-		<div class="inner">
-			<div class="grid-x">
-				<div class="large-auto cell">
-					<nav aria-label="You are here:" role="navigation">
-						<ul class="breadcrumbs">
-							{% block breadcrumb %}{% endblock %}
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<div class="grid-x">
-				<div class="main large-9 medium-9 small-12 cell">
-				{% block content_header %}{% endblock %}
-				{% block content %}{% endblock %}
-			</div>
-				<aside class="sidebar large-3 medium-3 small-12 columns">
-					{% block sidebar %}{% endblock %}
-					<section class="widget">
-						<div class="wrap">
-							<div class="widget-body">
-
-							</div>
-						</div>
-					</section>
-				</aside>
-			</div>
-		</div>
-	</main>
-	<footer>
-		<div class="inner">
-			<p class="credit">Compargram.com © All rights reserved.</p>
-		</div>
-	</footer>
-	<a data-smooth-scroll class="top-button" href="#main-site">
-		<i class="fa fa-chevron-circle-up"></i>
-	</a>
+    </main>
+    <footer>
+        <div class="inner">
+            <p class="credit">Compargram.com © All rights reserved.</p>
+        </div>
+    </footer>
+    <a data-smooth-scroll class="top-button" href="#main-site">
+        <i class="fa fa-chevron-circle-up"></i>
+    </a>
 </div>
 {% block menu %}{% endblock %}
-<script src="{% static '/js/manifest.cd84f3a8cafdec0a6c50.js' %}"></script>
-<script src="{% static '/js/vendor.2c4055ced6190f80f498.js' %}"></script>
-<script src="{% static '/js/app.b251fa8523843d97dcbd.js' %}"></script>
+<script src="{% static '/js/manifest.2ae2e69a05c33dfc65f8.js' %}"></script>
+<script src="{% static '/js/vendor.383e235853f57ade0fa9.js' %}"></script>
+<script src="{% static '/js/app.8b2518c9b21ebd8361fc.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 {% block script %}{% endblock %}
 </body>

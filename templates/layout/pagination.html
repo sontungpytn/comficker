@@ -6,7 +6,7 @@
     <li class="current">
         {{ i }}
     </li>{% else %}
-    <li class="disabled">
+    <li>
         <a href="?page={{ i }}">{{ i }}</a>
     </li>{% endif %}{% endfor %}{% if pages.has_next %}
     <li>

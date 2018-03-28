@@ -42,6 +42,9 @@ class Image(models.Model):
         # Delete the file after the model
         storage.delete(path)
 
+    def __str__(self):
+        return self.title
+
 
 class Gallery(models.Model):
     title = models.CharField(max_length=160, unique=True)
@@ -55,6 +58,9 @@ class Gallery(models.Model):
         relations = GalleryRelationship.objects.filter(gallery=self)
         return relations
 
+    def __str__(self):
+        return self.title
+
 
 class GalleryRelationship(models.Model):
     gallery = models.ForeignKey(Gallery, related_name='photos', on_delete=models.CASCADE)
@@ -65,6 +71,9 @@ class GalleryRelationship(models.Model):
         db_table = 'media_gallery_relationship'
         unique_together = ('gallery', 'image')
         ordering = ['id']
+
+    def __str__(self):
+        return self.gallery.title + " | " + self.image.title
 
 
 def decode_base64_file(data, prefix='photo_'):

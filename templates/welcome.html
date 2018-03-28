@@ -1,27 +1,172 @@
 {% extends "layout/base.html" %}
 {% block breadcrumb %}
-	<li>Home</li>{% endblock %}
+    <li>Home</li>{% endblock %}
 {% block title %}Compargram.com - Compare everything{% endblock %}
-{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
+    information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
 {% block content %}
-	<section>
-		<div class="grid-x card-list">
-			{% for content in contents %}
-			<div class="small-12 margin-bottom-10">
-				<div class="wrap">
-					<div class="grid-x">
-						<div class="small-4 medium-2 cell card-icon">
-							<img src="{{ content.image.crop.80x80 }}">
-						</div>
-						<div class="auto cell card-body">
-							<a href="/{{ content.slug }}">
-								<span class="card-title">{{ content.name }}</span>
-							</a>
-							<div class="card-desc">{{ content.description }}</div>
-						</div>
-					</div>
-				</div>
-			</div>{% endfor %}
-		</div>
-	</section>
+    <div>
+        <h1 class="page-title site-title text-center">
+            COMPARGRAM.COM
+        </h1>
+        <section class="compare-search">
+            <div class="input-group">
+                <input class="input-group-field first" type="text" placeholder="You">
+                <span class="input-group-label"> vs </span>
+                <input class="input-group-field last" type="text" placeholder="Me">
+            </div>
+            <p class="text-center">
+                <button class="button button-compare">Compare</button>
+            </p>
+        </section>
+        <section>
+            <h2 class="text-center">New compare</h2>
+            <div class="row small-up-2 medium-up-3 large-up-4 small-12 compare-list">
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-banana">Apple
+                                and Banana</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-banana">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-cucumber">Apple
+                                and Cucumber</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-cucumber">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-watermelon">Apple
+                                and Watermelon</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-watermelon">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/banana-and-cucumber">Banana
+                                and Cucumber</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/banana-and-cucumber">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/banana-and-watermelon">Banana
+                                and Watermelon</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/banana-and-watermelon">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/cucumber-and-watermelon">Cucumber
+                                and Watermelon</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/cucumber-and-watermelon">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-cucumber">Apple
+                                and Cucumber</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-cucumber">See compare</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+              <span class="model-icon"><img
+                      src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon"><img
+                                    src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/food/apple-and-watermelon">Apple
+                                and Watermelon</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/food/apple-and-watermelon">See compare</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock %}
