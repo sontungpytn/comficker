@@ -6,9 +6,9 @@
 {% load i18n %}
 {% load static %}
 {% block title %}{{ user }}{% endblock %}
-{% block content_header %}<h1 class="page-title">Members</h1>{% endblock %}
+{% block content_header %}<h1 class="page-title text-center">Members</h1>{% endblock %}
 {% block content %}
-	<section class="row small-12 account-information">
+	<section class="small-12 account-information">
 		<div class="row small-12">
 			<div class="column small-4">
 				<img alt="{{ user }}" src="{% if user.profile.image is None %}{% static 'img/avatar.png' %}"{% else %}

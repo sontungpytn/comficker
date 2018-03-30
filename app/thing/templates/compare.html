@@ -1,305 +1,56 @@
-{% extends "layout/base.html" %}
-{% block title %}aaaaa{% endblock %}
+{% extends "layout/base.html" %}{% load custom_tags %}
+{% block title %}{{ compare.first.name }} and {{ compare.second.name }} comparison{% endblock %}
 {% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
     information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
 {% block content %}
     <section class="row">
-        <h1 class="page-title text-center small-12">Apple and Banana comparison</h1>
-        <div class="small-12">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="text-right" width="40%"><a href="/food/apple">Apple</a></th>
-                    <th class="text-center" width="20%">vs</th>
-                    <th class="text-left" width="40%"><a href="/food/banana">Banana</a></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">An apple is a sweet, edible fruit produced by an apple tree
-                        (Malus pumila).
-                        Apple trees are cultivated worldwide as a fruit tree, and is the most widely grown species in
-                        the genus
-                        Malus.
-                    </td>
-                    <th width="20%"></th>
-                    <td width="40%" class="text-left">The banana is an edible fruit – botanically a berry – produced by
-                        several
-                        kinds of large herbaceous flowering plants in the genus Musa. In some countries, bananas used
-                        for cooking
-                        may be called plantains, in contrast to dessert bananas.
-                    </td>
-                </tr>
-                <tr id="action_like">
-                    <td class="text-right">
-                        <div class="vote-button switch"><input id="vote-button-apple" type="checkbox"
-                                                               name="vote-button-apple"
-                                                               class="switch-input"> <label for="vote-button-apple"
-                                                                                            class="switch-paddle"><span
-                                class="switch-active"><i aria-hidden="true" class="fa fa-thumbs-up"></i></span> <span
-                                class="switch-inactive"><i aria-hidden="true" class="fa fa-thumbs-down"></i></span>
-                            <span
-                                    class="count">1</span></label></div>
-                    </td>
-                    <th class="text-center">Vote</th>
-                    <td class="text-left">
-                        <div class="vote-button switch"><input id="vote-button-banana" type="checkbox"
-                                                               name="vote-button-banana"
-                                                               class="switch-input"> <label for="vote-button-banana"
-                                                                                            class="switch-paddle"><span
-                                class="switch-active"><i aria-hidden="true" class="fa fa-thumbs-up"></i></span> <span
-                                class="switch-inactive"><i aria-hidden="true" class="fa fa-thumbs-down"></i></span>
-                            <span
-                                    class="count">1</span></label></div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <h2>Generic's properties</h2>
-            <table id="vitamin" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Vitamin</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Niacin</th>
-                    <td width="40%" class="text-left">0.665 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Folates</th>
-                    <td width="40%" class="text-left">20 µg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">20 Gram</td>
-                    <th width="20%">Vitamin A</th>
-                    <td width="40%" class="text-left">64 IU</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">21 Gram</td>
-                    <th width="20%">Vitamin B</th>
-                    <td width="40%" class="text-left"></td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">22 Gram</td>
-                    <th width="20%">Vitamin C</th>
-                    <td width="40%" class="text-left">8.7 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Vitamin E</th>
-                    <td width="40%" class="text-left">0.10 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Vitamin K</th>
-                    <td width="40%" class="text-left">0.5 µg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Pantothenic acid</th>
-                    <td width="40%" class="text-left">0.334 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Pyridoxine</th>
-                    <td width="40%" class="text-left">0.367 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Riboflavin</th>
-                    <td width="40%" class="text-left">0.073 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">None</td>
-                    <th width="20%">Thiamin</th>
-                    <td width="40%" class="text-left">0.031 mg</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="general" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">General</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">Sweet, Sour</td>
-                    <th width="20%">Taste</th>
-                    <td width="40%" class="text-left">Sweet</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">Red, Yellow, Green</td>
-                    <th width="20%">Color</th>
-                    <td width="40%" class="text-left">Yellow, Green</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="electrolytes" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Electrolytes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">1 mg</td>
-                    <th width="20%">Sodium</th>
-                    <td width="40%" class="text-left">1 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">107 mg</td>
-                    <th width="20%">Potassium</th>
-                    <td width="40%" class="text-left">358 mg</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="minerals" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Minerals</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">6 mg</td>
-                    <th width="20%">Calcium</th>
-                    <td width="40%" class="text-left">5 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">0.12 mg</td>
-                    <th width="20%">Iron</th>
-                    <td width="40%" class="text-left">0.26 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">5 mg</td>
-                    <th width="20%">Magnesium</th>
-                    <td width="40%" class="text-left">27 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">11 mg</td>
-                    <th width="20%">Phosphorus</th>
-                    <td width="40%" class="text-left">22 mg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">0.04 mg</td>
-                    <th width="20%">Zinc</th>
-                    <td width="40%" class="text-left">0.15 mg</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="phyto-nutrients" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Phyto-nutrients</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">27 μg</td>
-                    <th width="20%">Carotene-β</th>
-                    <td width="40%" class="text-left">26 µg</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">11 μg</td>
-                    <th width="20%">Crypto-xanthin-β</th>
-                    <td width="40%" class="text-left">None</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">29 μg</td>
-                    <th width="20%">Lutein-zeaxanthin</th>
-                    <td width="40%" class="text-left">22 µg</td>
-                </tr>
-                </tbody>
-            </table>
-            <table id="other-constituents" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Other constituents</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right">85.56 g</td>
-                    <th width="20%">Water</th>
-                    <td width="40%" class="text-left">74.91 g</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">52 Kcal</td>
-                    <th width="20%">Energy</th>
-                    <td width="40%" class="text-left">89 kcal</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">13.81 g</td>
-                    <th width="20%">Carbohydrates</th>
-                    <td width="40%" class="text-left">22.84 g</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">0.26 g</td>
-                    <th width="20%">Protein</th>
-                    <td width="40%" class="text-left">1.09 g</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">0.17 g</td>
-                    <th width="20%">Total Fat</th>
-                    <td width="40%" class="text-left">0.33 g</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">0 mg</td>
-                    <th width="20%">Cholesterol</th>
-                    <td width="40%" class="text-left"></td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">2.40 g</td>
-                    <th width="20%">Dietary Fiber</th>
-                    <td width="40%" class="text-left">2.60 g</td>
-                </tr>
-                </tbody>
-            </table>
-            <h2>Fruit's properties</h2>
-            <table id="fruit" class="table table-hover">
-                <thead>
-                <tr>
-                    <th colspan="3">Fruit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td width="40%" class="text-right"><a
-                            href="http://compargram.com/media/images/12a4c6dc4fb044b79f809c73ef2efa6e.jpg"
-                            data-fancybox=""
-                            data-caption="Seed"><img class="property-img"
-                                                     src="http://compargram.com/media/__sized__/images/12a4c6dc4fb044b79f809c73ef2efa6e-crop-c0-5__0-5-400x400-70.jpg"
-                                                     alt="Seed"></a></td>
-                    <th width="20%">Seed</th>
-                    <td width="40%" class="text-left"><a
-                            href="http://compargram.com/media/images/1a0e11d1cad34ef09ca55167eeabd01d.jpg"
-                            data-fancybox=""
-                            data-caption="Seed"><img class="property-img"
-                                                     src="http://compargram.com/media/__sized__/images/1a0e11d1cad34ef09ca55167eeabd01d-crop-c0-5__0-5-400x400-70.jpg"
-                                                     alt="Seed"></a></td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">Plantae</td>
-                    <th width="20%">Kingdom</th>
-                    <td width="40%" class="text-left">Plantae</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">White, Yellow</td>
-                    <th width="20%">Inside color</th>
-                    <td width="40%" class="text-left">White, Yellow</td>
-                </tr>
-                <tr>
-                    <td width="40%" class="text-right">Peeling with a knife</td>
-                    <th width="20%">Peeling difficulty</th>
-                    <td width="40%" class="text-left">Very easy</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="column column-block">
+            <h1 class="page-title text-center small-12">{{ compare.first.name }} and {{ compare.second.name }}
+                comparison</h1>
+            <div class="small-12">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="text-right" width="40%">{{ compare.first.name }}'s Photo</th>
+                        <th class="text-center" width="20%"></th>
+                        <th class="text-left" width="40%">{{ compare.second.name }}'s Photo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="img-fit">
+                            <img src="{{ compare.first.photos.featured.path.crop.400x400 }}"
+                                 alt="{{ compare.first.name }}">
+                        </td>
+                        <th></th>
+                        <td class="img-fit">
+                            <img src="{{ compare.second.photos.featured.path.crop.400x400 }}"
+                                 alt="{{ compare.second.name }}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>{% for data in compare.data %}
+                <h2>{{ data.name }}</h2>{% for s_data in data.data %}
+                    <table id="fruit" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="3">{{ s_data.name }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width="40%" class="text-right">{% get_data_value data=s_data order="first" %}</td>
+                            <th width="20%">{{ s_data.name }}</th>
+                            <td width="40%" class="text-left">{% get_data_value data=s_data order="second" %}</td>
+                        </tr>
+                        <tr>{% for r_data in s_data.data %}
+                            <td width="40%" class="text-right">{{ r_data.first }}</td>
+                            <th width="20%">{{ r_data.name }}</th>
+                            <td width="40%" class="text-left">{{ r_data.second }}</td>
+                            </tr>{% endfor %}
+                        </tbody>
+                    </table>{% endfor %}{% endfor %}
+            </div>
         </div>
     </section>
 {% endblock %}

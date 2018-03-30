@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>{% load static %}
+<head>{% load static %}{% load custom_tags %}{% classifies as classifies %}
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -26,14 +26,19 @@
             <nav class="top-bar" data-responsive-menu="accordion medium-dropdown" id="example-menu">
                 <ul class="vertical medium-horizontal menu top-bar-left"
                     data-responsive-menu="accordion medium-dropdown">
-                    <li><a href="/member">Member</a></li>
+                    <li role="menuitem" class="is-dropdown-submenu-parent opens-right" aria-haspopup="true" aria-label="Compare" data-is-click="false">
+						<a href="#">Menu</a>
+						<ul class="vertical menu is-dropdown-submenu submenu first-sub" data-submenu="" role="menu" style="">{% for classify in classifies %}
+							<li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><a href="/{{ classify.slug }}">{{ classify.name }}</a></li>{% endfor %}
+						</ul>
+					</li>
                     <li><a href="/member">Member</a></li>
                 </ul>
-                <ul class="vertical medium-horizontal menu top-bar-right"
+                <ul class="vertical medium-horizontal menu top-bar-right dropdown"
                     data-responsive-menu="accordion medium-dropdown">
-                    <li>
+                    <li class="is-dropdown-submenu-parent opens-right">
                         <a href="" class="account">Account</a>
-                        <ul class="vertical menu is-dropdown-submenu">{% if not request.user.is_authenticated %}
+                        <ul class="vertical menu is-dropdown-submenu submenu first-sub">{% if not request.user.is_authenticated %}
                             <li><a href='/member/register/'>Register</a></li>
                             <li><a href='/member/login/'>Login</a></li>{% else %}
                             <li><a href="/member/{{ request.user.id }}">Welcome {{ request.user }}</a></li>

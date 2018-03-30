@@ -3,31 +3,33 @@
 {% block title %}Register{% endblock %}
 {% block content_header %}<h1 class="text-center">Register</h1>{% endblock %}
 {% block content %}
-	<section class="row align-center">
-		<form method="post" action="." class="column small-12 large-8">
-			{% csrf_token %}
-			<fieldset>
-				<label for="exampleInputEmail1">Username</label>
-				<input type="text" class="form-control" id="id_username" aria-describedby="emailHelp"
-				       placeholder="Enter username" name="username">{% for error in form.username.errors %}
-				<div class="form-control-feedback">{{ error }}</div>{% endfor %}
-				<label for="exampleInputEmail1">Email address</label>
-				<input type="email" class="form-control" id="id_email" aria-describedby="emailHelp"
-				       placeholder="Enter email" name="email">
-				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-					else.
-				</small>{% for error in form.email.errors %}
-				<div class="form-control-feedback">{{ error }}</div>{% endfor %}
-				<label for="exampleInputPassword1">Password</label>
-				<input type="password" class="form-control" id="id_password1" placeholder="Password"
-				       name="password1">{% for error in form.password1.errors %}
-				<div class="form-control-feedback">{{ error }}</div>{% endfor %}
-				<label for="exampleInputPassword1">Password confirmation</label>
-				<input type="password" class="form-control" id="id_password2" placeholder="Password"
-				       name="password2">{% for error in form.password2.errors %}
-				<div class="form-control-feedback">{{ error }}</div>{% endfor %}
-			</fieldset>
-			<input type="submit" class="button" value="{% trans 'Submit' %}"/>
-		</form>
-	</section>
+    <section class="row align-center">
+        <div class="column column-block small-12 large-6">
+            <form method="post" action="." class="align-center">
+                {% csrf_token %}
+                <fieldset>
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" id="id_username" aria-describedby="emailHelp"
+                           placeholder="Enter username" name="username">{% for error in form.username.errors %}
+                    <div class="form-control-feedback">{{ error }}</div>{% endfor %}
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="id_email" aria-describedby="emailHelp"
+                           placeholder="Enter email" name="email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.
+                    </small>{% for error in form.email.errors %}
+                    <div class="form-control-feedback">{{ error }}</div>{% endfor %}
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="id_password1" placeholder="Password"
+                           name="password1">{% for error in form.password1.errors %}
+                    <div class="form-control-feedback">{{ error }}</div>{% endfor %}
+                    <label for="exampleInputPassword1">Password confirmation</label>
+                    <input type="password" class="form-control" id="id_password2" placeholder="Password"
+                           name="password2">{% for error in form.password2.errors %}
+                    <div class="form-control-feedback">{{ error }}</div>{% endfor %}
+                </fieldset>
+                <input type="submit" class="button" value="{% trans 'Submit' %}"/>
+            </form>
+        </div>
+    </section>
 {% endblock %}

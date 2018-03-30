@@ -21,25 +21,28 @@
         </section>
         <section>
             <h2 class="text-center">New compare</h2>
-            <div class="row small-up-2 medium-up-3 large-up-4 small-12 compare-list">
+            <div class="row small-up-2 medium-up-3 large-up-4 small-12 compare-list">{% for compare in comparison %}
                 <div class="column column-block">
                     <div class="compare-card">
                         <div class="small-12 compare-card-top">
-                          <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/c4946d08724c4dcc877f2f1cd00f7e3d-crop-c0-5__0-5-400x400-70.jpg"></span>
+                                <span class="model-icon">
+                                    <img src="{{ compare.0.photos.featured.path.crop.64x64 }}">
+                                </span>
                             <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                            <span class="model-icon"><img
-                                    src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                            <span class="model-icon">
+                                    <img src="{{ compare.1.photos.featured.path.crop.64x64 }}">
+                                </span>
                         </div>
                         <div class="small-12 compare-card-middle">
-                            <a href="/food/apple-and-banana">Apple
-                                and Banana</a>
+                            <a href="/{{ classify.master_parent.slug }}/{{ compare.0.slug }}-and-{{ compare.1.slug }}">{{ compare.0 }}
+                                and {{ compare.1 }}</a>
                         </div>
                         <div class="small-12 compare-card-bottom">
-                            <a href="/food/apple-and-banana">See compare</a>
+                            <a href="/{{ classify.master_parent.slug }}/{{ compare.0.slug }}-and-{{ compare.1.slug }}">See
+                                compare</a>
                         </div>
                     </div>
-                </div>
+                </div>{% endfor %}
             </div>
         </section>
     </div>
