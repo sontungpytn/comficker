@@ -100,7 +100,7 @@ def thing_compare(request, slug, first, second):
             compare.data = get_compare_data(first_thing, second_thing)
             compare.save()
     return render(request, 'compare.html',
-                  {'classify': classify, 'compare': compare, 'first': first_thing, 'second': second_thing})
+                  {'classify': classify, 'compare': compare})
 
 
 def thing_comment(request):

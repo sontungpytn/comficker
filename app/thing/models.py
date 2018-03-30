@@ -68,6 +68,7 @@ class Field(models.Model):
 class Thing(models.Model):
     name = models.CharField(max_length=60)
     slug = models.CharField(max_length=60)
+    description = models.CharField(max_length=160, blank=True)
     photos = models.ForeignKey(Gallery, on_delete=models.SET_NULL, blank=True, null=True)
     data = JSONField(blank=True)
     classify = models.ForeignKey(Classify, blank=True, on_delete=models.SET_NULL, related_name='thing_classify',

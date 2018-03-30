@@ -9,23 +9,28 @@
                 comparison</h1>
             <div class="small-12">
                 <table>
-                    <thead>
-                    <tr>
-                        <th class="text-right" width="40%">{{ compare.first.name }}'s Photo</th>
-                        <th class="text-center" width="20%"></th>
-                        <th class="text-left" width="40%">{{ compare.second.name }}'s Photo</th>
-                    </tr>
-                    </thead>
                     <tbody>
                     <tr>
-                        <td class="img-fit">
-                            <img src="{{ compare.first.photos.featured.path.crop.400x400 }}"
-                                 alt="{{ compare.first.name }}">
+                        <th width="20%">
+                            <img src="{{ classify.image.path.crop.400x400 }}" alt="{{ classify.name }}">
+                        </th>
+                        <td width="40%" class="img-fit">
+                            <div class="row border-box">
+                                <div class="columns small-4">
+                                    <img src="{{ compare.first.photos.featured.path.crop.400x400 }}" alt="{{ compare.first.name }}">
+                                    <a href="/{{ classify.slug }}/{{ compare.first.slug }}">{{ compare.first.name }}</a>
+                                </div>
+                                <div class="columns">{{ compare.first.description }}</div>
+                            </div>
                         </td>
-                        <th></th>
-                        <td class="img-fit">
-                            <img src="{{ compare.second.photos.featured.path.crop.400x400 }}"
-                                 alt="{{ compare.second.name }}">
+                        <td width="40%" class="img-fit">
+                            <div class="row border-box">
+                                <div class="columns small-4">
+                                    <img src="{{ compare.second.photos.featured.path.crop.400x400 }}" alt="{{ compare.second.name }}">
+                                    <a href="/{{ classify.slug }}/{{ compare.second.slug }}">{{ compare.second.name }}</a>
+                                </div>
+                                <div class="columns">{{ compare.second.description }}</div>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -39,14 +44,14 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td width="40%" class="text-right">{% get_data_value data=s_data order="first" %}</td>
                             <th width="20%">{{ s_data.name }}</th>
-                            <td width="40%" class="text-left">{% get_data_value data=s_data order="second" %}</td>
-                        </tr>
-                        <tr>{% for r_data in s_data.data %}
-                            <td width="40%" class="text-right">{{ r_data.first }}</td>
+                            <td width="40%">{% get_data_value data=s_data order="first" %}</td>
+                            <td width="40%">{% get_data_value data=s_data order="second" %}</td>
+                        </tr>{% for r_data in s_data.data %}
+                        <tr>
                             <th width="20%">{{ r_data.name }}</th>
-                            <td width="40%" class="text-left">{{ r_data.second }}</td>
+                            <td width="40%">{{ r_data.first }}</td>
+                            <td width="40%">{{ r_data.second }}</td>
                             </tr>{% endfor %}
                         </tbody>
                     </table>{% endfor %}{% endfor %}
