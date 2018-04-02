@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "layout/base.html" %}{% load custom_tags %}
+{% block breadcrumb %}
+    <li>Home</li>{% endblock %}
+{% block title %}{{ item.name }} - {{ classify.name }}{% endblock %}
+{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
+    information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block content %}
+    <div class="row mt-20">
+    <div class="columns small-12 medium-4">
+      <h2>{{ item.name }}</h2>
+      <p>{{ item.description }}</p>
+      <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a></p>
+    </div>
+    <div class="columns small-12 medium-8 compare-list">
+      <table>
+        <thead>
+        <tr>
+          <th width="30%">Field</th>
+          <th width="70%">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in item.data %}
+        <tr>
+          <th class="text-left">{{ data.name }}</th>
+          <td>{% get_data_value data=data order="none" %}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

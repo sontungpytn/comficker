@@ -4,29 +4,27 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-
+from django.utils.text import slugify
 from .models import Classify, Thing, Compare
 
 
 # Create your views here.
 
 
-def get_field_data(field, first, second):
+def get_field_data(field, first, second, level):
     data = []
-    data_content = {'name': field.name, 'first': "", 'second': "", 'type': "text"}
+    data_content = {'name': field.name, 'first': "", 'second': "", 'level': level, 'data': []}
+    level = level + 1
     for d in first.data:
-        if d['name'] == field.name:
-            data_content['first'] = d['data']
-            data_content['type'] = d['type']
+        if slugify(d['name']) == slugify(field.name):
+            data_content['first'] = d
     for d in second.data:
-        if d['name'] == field.name:
-            data_content['second'] = d['data']
-            data_content['type'] = d['type']
-
+        if slugify(d['name']) == slugify(field.name):
+            data_content['second'] = d
     for f in field.childs():
-        data_content['data'] = get_field_data(f, first, second)
+        data_content['data'] = data_content.get('data') + get_field_data(f, first, second, level)[0]
     data.append(data_content)
-    return data
+    return data, level
 
 
 def get_compare_data(first, second):
@@ -37,14 +35,15 @@ def get_compare_data(first, second):
         if first.classify.id == second.classify.id:
             list_classify.append(first.classify)
             list_classify = list_classify + first.classify.parents()
+
         list_classify.sort(key=lambda x: x.id)
         for classify in list_classify:
-            sub_data = {'name': classify.name, 'data': []}
+            sub_data = {'name': classify.name, 'data': [], 'level': 1}
             for field in classify.fields():
-                sub_data['data'] = sub_data['data'] + get_field_data(field, first, second)
+                temp = get_field_data(field, first, second, 2)[0]
+                sub_data['data'] = sub_data['data'] + temp
             data.append(sub_data)
-
-        return data
+        return {'data': data, 'level': 0}
     else:
         return {}
 
@@ -83,7 +82,7 @@ def thing_compare(request, slug, first, second):
     classify = get_object_or_404(Classify, slug=slug)
     first_thing = get_object_or_404(Thing, slug=first)
     second_thing = get_object_or_404(Thing, slug=second)
-    # return HttpResponse(json.dumps(get_compare_data(first_thing, second_thing)))
+    #return HttpResponse(json.dumps(get_compare_data(first_thing, second_thing)))
     compare = Compare.objects.filter(first=first_thing, second=second_thing).first()
     if compare is None:
         if first_thing.name == second_thing.name:
@@ -105,3 +104,10 @@ def thing_compare(request, slug, first, second):
 
 def thing_comment(request):
     pass
+
+
+def thing(request, classify_slug, thing_slug):
+    classify = get_object_or_404(Classify, slug=classify_slug)
+    thing = get_object_or_404(Thing, slug=thing_slug)
+    return render(request, 'things.html',
+                  {'classify': classify, 'item': thing})

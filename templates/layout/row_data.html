@@ -1,0 +1,13 @@
+{% load custom_tags %}
+{% for temp in data.data %}{% get_col_row data=temp number=0 max_level=max_level as size %}
+    <tr>
+        <th rowspan="{{ size.row }}" colspan="{{ size.col }}">
+            <span>{{ temp.name }}</span>
+        </th>
+        {% if size.status %}
+            <td>{% get_data_value data=temp order="first" %}</td>
+            <td>{% get_data_value data=temp order="second" %}</td>
+        {% endif %}
+    </tr>
+    {% include "layout/row_data.html" with data=temp max_level=max_level %}
+{% endfor %}

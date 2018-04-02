@@ -64,6 +64,13 @@ class Field(models.Model):
     def childs(self):
         return Field.objects.filter(parent=self)
 
+    def child(self):
+        data = []
+        for child in Field.objects.filter(parent=self).order_by('name'):
+            data.append(child)
+            data = data + child.child()
+        return data
+
 
 class Thing(models.Model):
     name = models.CharField(max_length=60)
