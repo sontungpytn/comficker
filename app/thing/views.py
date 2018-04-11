@@ -1,6 +1,6 @@
 import itertools
 import json
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
@@ -13,14 +13,16 @@ from .models import Classify, Thing, Compare
 
 def get_field_data(field, first, second, level):
     data = []
-    data_content = {'name': field.name, 'first': "", 'second': "", 'level': level, 'data': []}
+    data_content = {'name': field.name, 'first': {}, 'second': {}, 'level': level, 'data': []}
     level = level + 1
+
     for d in first.data:
-        if slugify(d['name']) == slugify(field.name):
+        if slugify(d.get('name')) == slugify(field.name):
             data_content['first'] = d
     for d in second.data:
-        if slugify(d['name']) == slugify(field.name):
+        if slugify(d.get('name')) == slugify(field.name):
             data_content['second'] = d
+
     for f in field.childs():
         data_content['data'] = data_content.get('data') + get_field_data(f, first, second, level)[0]
     data.append(data_content)
@@ -35,7 +37,12 @@ def get_compare_data(first, second):
         if first.classify.id == second.classify.id:
             list_classify.append(first.classify)
             list_classify = list_classify + first.classify.parents()
-
+        else:
+            list_classify.append(first.classify)
+            list_classify = list_classify + first.classify.parents()
+            list_classify.append(second.classify)
+            list_classify = list_classify + second.classify.parents()
+            list_classify = list(set(list_classify))
         list_classify.sort(key=lambda x: x.id)
         for classify in list_classify:
             sub_data = {'name': classify.name, 'data': [], 'level': 1}
@@ -75,14 +82,23 @@ def thing_show(request, slug):
     classify_normal_things.sort(key=lambda x: x.name)
     comparison = comparison + list(itertools.combinations(classify_normal_things, 2))
 
-    return render(request, 'classify.html', {'classify': classify, 'comparison': comparison})
+    paginator = Paginator(comparison, 8)
+    page = request.GET.get('page')
+    try:
+        list_images = paginator.page(page)
+    except PageNotAnInteger:
+        list_images = paginator.page(1)
+    except EmptyPage:
+        list_images = paginator.page(paginator.num_pages)
+
+    return render(request, 'classify.html', {'classify': classify, 'comparison': list_images})
 
 
 def thing_compare(request, slug, first, second):
     classify = get_object_or_404(Classify, slug=slug)
     first_thing = get_object_or_404(Thing, slug=first)
     second_thing = get_object_or_404(Thing, slug=second)
-    #return HttpResponse(json.dumps(get_compare_data(first_thing, second_thing)))
+    # return HttpResponse(json.dumps(get_compare_data(first_thing, second_thing)))
     compare = Compare.objects.filter(first=first_thing, second=second_thing).first()
     if compare is None:
         if first_thing.name == second_thing.name:
@@ -91,12 +107,13 @@ def thing_compare(request, slug, first, second):
             return HttpResponseRedirect('/' + slug + '/' + second_thing.slug + '-and-' + first_thing.slug)
         else:
             slug_temp = first_thing.slug + '-and-' + second_thing.slug
-            compare = Compare(first=first_thing, second=second_thing, slug=slug_temp,
+            compare = Compare(first=first_thing, second=second_thing, classify=classify, slug=slug_temp,
                               data=get_compare_data(first_thing, second_thing))
             compare.save()
     else:
         if first_thing.is_edited or second_thing.is_edited:
             compare.data = get_compare_data(first_thing, second_thing)
+            compare.classify = classify
             compare.save()
     return render(request, 'compare.html',
                   {'classify': classify, 'compare': compare})
@@ -110,4 +127,15 @@ def thing(request, classify_slug, thing_slug):
     classify = get_object_or_404(Classify, slug=classify_slug)
     thing = get_object_or_404(Thing, slug=thing_slug)
     return render(request, 'things.html',
+                  {'classify': classify, 'item': thing})
+
+
+def thing_create(request):
+    return render(request, 'create.html', {})
+
+
+def thing_edit(request, classify_slug, thing_slug):
+    classify = get_object_or_404(Classify, slug=classify_slug)
+    thing = get_object_or_404(Thing, slug=thing_slug)
+    return render(request, 'edit.html',
                   {'classify': classify, 'item': thing})

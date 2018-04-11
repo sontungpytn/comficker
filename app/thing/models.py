@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.db.models import Q
 
 from app.media.models import Image, Gallery
 
@@ -9,11 +10,11 @@ from app.media.models import Image, Gallery
 
 
 class Classify(models.Model):
-    name = models.CharField(max_length=20)
-    slug = models.CharField(max_length=60)
+    name = models.CharField(max_length=20, unique=True)
+    slug = models.CharField(max_length=60, unique=True)
     image = models.ForeignKey(Image, blank=True, on_delete=models.SET_NULL, related_name='classify_image', null=True)
     allow_foreign_compare = models.BooleanField(default=True)
-    description = models.CharField(max_length=120, blank=True)
+    description = models.CharField(max_length=300, blank=True)
     parent = models.ForeignKey("self", related_name='parent_classify', on_delete=models.SET_NULL, blank=True, null=True)
     created_date = models.DateField(auto_now=True)
 
@@ -31,7 +32,7 @@ class Classify(models.Model):
         data = []
         if self.parent is not None:
             data.append(self.parent)
-            data= data + self.parent.parents()
+            data = data + self.parent.parents()
         return data
 
     def master_parent(self):
@@ -50,10 +51,13 @@ class Classify(models.Model):
     def things(self):
         return Thing.objects.filter(classify=self).order_by('name')
 
+    def compare_list(self):
+        return Compare.objects.filter(classify=self)[:2]
+
 
 class Field(models.Model):
-    name = models.CharField(max_length=20)
-    slug = models.CharField(max_length=60)
+    name = models.CharField(max_length=20, unique=True)
+    slug = models.CharField(max_length=60, unique=True)
     description = models.CharField(max_length=200, blank=True)
     classify = models.ForeignKey(Classify, on_delete=models.CASCADE, related_name='field_classify')
     parent = models.ForeignKey("self", related_name='parent_field', on_delete=models.SET_NULL, blank=True, null=True)
@@ -74,7 +78,7 @@ class Field(models.Model):
 
 class Thing(models.Model):
     name = models.CharField(max_length=60)
-    slug = models.CharField(max_length=60)
+    slug = models.CharField(max_length=60, unique=True)
     description = models.CharField(max_length=160, blank=True)
     photos = models.ForeignKey(Gallery, on_delete=models.SET_NULL, blank=True, null=True)
     data = JSONField(blank=True)
@@ -87,16 +91,25 @@ class Thing(models.Model):
     def __str__(self):
         return self.name
 
+    def related_compare(self):
+        return Compare.objects.filter(Q(first=self) | Q(second=self))
+
 
 class Compare(models.Model):
     first = models.ForeignKey(Thing, on_delete=models.CASCADE, related_name='first_compare')
     second = models.ForeignKey(Thing, on_delete=models.CASCADE, related_name='second_compare')
+    classify = models.ForeignKey(Classify, blank=True, on_delete=models.SET_NULL, related_name='compare_classify',
+                                 null=True, default=None)
     data = JSONField(blank=True, null=True, default=None)
     slug = models.CharField(max_length=120)
     created_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.first.name + " and " + self.second.name
+
+    def related(self):
+        return Compare.objects.filter(
+            Q(first=self.first) | Q(first=self.second) | Q(second=self.first) | Q(second=self.second))
 
 
 class Comment(models.Model):
@@ -113,3 +126,10 @@ class Vote(models.Model):
     thing = models.ForeignKey(Thing, on_delete=models.CASCADE, related_name='vote_thing')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='vote_user')
     created_date = models.DateField(auto_now=True)
+
+
+class Contributed(models.Model):
+    thing = models.ForeignKey(Thing, on_delete=models.CASCADE, related_name='thing_contributed')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_contributed')
+    created_date = models.DateField(auto_now=True)
+

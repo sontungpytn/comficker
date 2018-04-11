@@ -18,14 +18,17 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from . import views
-
+from app.thing.api import views as thing_api_views
 from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-
+router.register(r'thing', thing_api_views.ThingViewSet)
+router.register(r'field', thing_api_views.FieldViewSet)
+router.register(r'classify', thing_api_views.ClassifyFieldViewSet)
 
 urlpatterns = [
+    url(r'^test/$', views.test, name='test'),
     url(r'^$', views.welcome, name='home'),
     url(r'^api/', include(router.urls)),
     url(r'^member/', include('registration.backends.hmac.urls')),

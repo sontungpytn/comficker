@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}{% load custom_tags %}
+{% block breadcrumb %}
+    <li>Home</li>{% endblock %}
+{% block title %}Edit {{ item.name }}{% endblock %}
+{% block description %}Edit {{ item.name }}{% endblock %}
+{% block content %}
+    <div id="model_handle">
+        <model-handle :action="'edit'" :id="{{ item.id }}"></model-handle>
+    </div>
+{% endblock %}

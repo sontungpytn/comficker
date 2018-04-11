@@ -6,6 +6,7 @@ from app.thing.models import Classify, Field
 
 register = template.Library()
 
+
 @register.simple_tag
 def get_data_value(data, order):
     if order == 'first' or order == 'second':
@@ -19,7 +20,7 @@ def get_data_value(data, order):
         output = data
     if data.get('type') == "list":
         data = ""
-        for data_temp in output:
+        for data_temp in output.get('data'):
             data = data + data_temp + ", "
         return mark_safe(data[:-2])
     elif output.get('type') == "image":
@@ -49,52 +50,13 @@ def get_meta_description(fields):
 
 @register.simple_tag
 def classifies():
-    return Classify.objects.all().filter(parent__isnull=True)
+    return Classify.objects.all().filter(parent__isnull=True).order_by('id')
 
 
-@register.simple_tag
-def get_max_level(data, max_level):
-    for temp in data:
-        if temp.get('level') > max_level:
-            max_level = temp.get('level')
-            if type(temp.get('data')) is list:
-                if max_level < get_max_level(temp.get('data'), max_level):
-                    max_level = get_max_level(temp.get('data'), max_level)
-    return max_level
-
-
-@register.simple_tag
-def get_max_level2(data, max_level):
-    return get_max_level(data, max_level) + 2
-
-
-@register.simple_tag
-def get_max_level3(data, max_level):
-    return get_max_level(data, max_level)
-
-
-@register.simple_tag
-def get_current_level(max_level, level):
-    return max_level - level
-
-
-@register.simple_tag
-def get_children_number(data, number):
-    field = Field.objects.get(name__exact=data.get('name'))
-    return field.child().__len__(), data.get('level')
-
-
-@register.simple_tag
-def get_col_row(data, number, max_level):
-    children = get_children_number(data, number)[0]
-    level = get_children_number(data, number)[1]
-    if children == 0:
-        col = max_level - level
-        row = children + 1
-        status = True
-    else:
-        status = False
-        col = 1
-        row = children + 1
-    return {'row': row, 'col': col, 'status': status }
-
+def get_deep(dict_data, deep):
+    if type(dict_data.get('data')) is list:
+        if len(dict_data.get('data')) == 0:
+            deep = deep + 1
+        for temp in dict_data.get('data'):
+            deep = get_deep(temp, deep)
+    return deep

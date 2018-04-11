@@ -10,197 +10,36 @@
             COMPARGRAM.COM
         </h1>
         <section id="compare-box" class="compare-search">
-            <compare-box></compare-box>
         </section>
-        <section>
+        <section>{% for classify in classifies %}
             <div class="row mt-30">
                 <div class="columns small-12 medium-6">
-                    <h2>Reporting</h2>
-                    <p>Gain insight into your customers' purchasing behavior, by tracking and analyzing your sales and
-                        growth trends. Understand where your traffic originates and what encourages conversion.
-                        Reporting helps you make informed decisions and grow your business.</p>
-                    <p><a href="#" class="custom-button">View all ›</a></p>
+                    <h2>{{ classify.name }}</h2>
+                    <p>{{ classify.description }}</p>
+                    <p><a href="/{{ classify.slug }}" class="custom-button">View all ›</a></p>
                 </div>
-                <div class="row columns small-12 medium-6 compare-list small-up-2 medium-up-2">
+                <div class="row columns small-12 medium-6 compare-list small-up-2 medium-up-2">{% for compare in classify.compare_list %}
                     <div class="float-left column column-block">
                         <div class="compare-card">
                             <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
+                                <span class="model-icon">
+                                    <img src="{{ compare.first.photos.featured.path.crop.64x64 }}" alt="{{ compare.first.name }}">
+                                </span>
                                 <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                                <span class="model-icon">
+                                    <img src="{{ compare.second.photos.featured.path.crop.64x64 }}" alt="{{ compare.second.name }}">
+                                </span>
                             </div>
                             <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
+                                <a href="/{{ classify.slug }}/{{ compare.slug }}">{{ compare.first.name }} vs {{ compare.second.name }}</a>
                             </div>
                             <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
+                                <a href="/{{ classify.slug }}/{{ compare.slug }}">See compare</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
+                    </div>{% endfor %}
                 </div>
-            </div>
-            <div class="row mt-30">
-                <div class="row columns small-12 medium-6 compare-list small-up-2 medium-up-2">
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="columns small-12 medium-6">
-                    <h2>Reporting</h2>
-                    <p>Gain insight into your customers' purchasing behavior, by tracking and analyzing your sales and
-                        growth trends. Understand where your traffic originates and what encourages conversion.
-                        Reporting helps you make informed decisions and grow your business.</p>
-                    <p><a href="#" class="custom-button">View all ›</a></p>
-                </div>
-            </div>
-            <div class="row mt-30">
-                <div class="columns small-12 medium-6">
-                    <h2>Reporting</h2>
-                    <p>Gain insight into your customers' purchasing behavior, by tracking and analyzing your sales and
-                        growth trends. Understand where your traffic originates and what encourages conversion.
-                        Reporting helps you make informed decisions and grow your business.</p>
-                    <p><a href="#" class="custom-button">View all ›</a></p>
-                </div>
-                <div class="row columns small-12 medium-6 compare-list small-up-2 medium-up-2">
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-30">
-                <div class="row columns small-12 medium-6 compare-list small-up-2 medium-up-2">
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="columns small-12 medium-6">
-                    <h2>Reporting</h2>
-                    <p>Gain insight into your customers' purchasing behavior, by tracking and analyzing your sales and
-                        growth trends. Understand where your traffic originates and what encourages conversion.
-                        Reporting helps you make informed decisions and grow your business.</p>
-                    <p><a href="#" class="custom-button">View all ›</a></p>
-                </div>
-            </div>
+            </div>{% endfor %}
         </section>
     </div>
 {% endblock %}

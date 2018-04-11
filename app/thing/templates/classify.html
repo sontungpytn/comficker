@@ -1,23 +1,14 @@
 {% extends "layout/base.html" %}
 {% block breadcrumb %}
     <li>Home</li>{% endblock %}
-{% block title %}{{ classify.name }}s Compare{% endblock %}
-{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
-    information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block title %}{{ classify.name }} Compare{% endblock %}
+{% block description %}{{ classify.description }}{% endblock %}
 {% block content %}
     <div>
         <h1 class="page-title site-title text-center">
-            {{ classify.name }}s Compare
+            {{ classify.name }} Compare
         </h1>
-        <section class="compare-search">
-            <div class="input-group">
-                <input class="input-group-field first" type="text" placeholder="You">
-                <span class="input-group-label"> vs </span>
-                <input class="input-group-field last" type="text" placeholder="Me">
-            </div>
-            <p class="text-center">
-                <button class="button button-compare">Compare</button>
-            </p>
+        <section id="compare-box" class="compare-search">
         </section>
         <section>
             <h2 class="text-center">New compare</h2>
@@ -45,5 +36,8 @@
                 </div>{% endfor %}
             </div>
         </section>
+        <div class="small-12">
+            {% include "layout/pagination.html" with pages=comparison %}
+        </div>
     </div>
 {% endblock %}

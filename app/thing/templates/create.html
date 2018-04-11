@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}{% load custom_tags %}
+{% block breadcrumb %}
+    <li>Home</li>{% endblock %}
+{% block title %}Create{% endblock %}
+{% block description %}Create new object on compargram.com{% endblock %}
+{% block content %}
+    <div id="model_handle">
+        <model-handle :action="'create'"></model-handle>
+    </div>
+{% endblock %}

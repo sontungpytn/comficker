@@ -9,174 +9,91 @@
                 comparison</h1>
             <div class="row small-12 small-up-1">
                 <div class="column column-block">
-                    <table id="vitamin" class="table table-hover table-border">
+                    <table id="vitamin" class="table table-hover table-border compare-table">
                         <tbody>
                         <tr>
-                            <th width="20%" colspan="{% get_max_level data=compare.data.data max_level=0 %}">
+                            <th width="33.3333%" colspan="4">
                                 <p></p>
                             </th>
-                            <td width="40%" class="img-fit">
+                            <td width="33.3333%" class="img-fit">
                                 <div class="row thing-wrap">
                                     <div class="columns small-12 medium-4">
                                         <img src="{{ compare.first.photos.featured.path.crop.400x400 }}"
                                              alt="{{ compare.first.name }}">
                                     </div>
                                     <div class="columns small-12 medium-8">
-                                        <h2>
+                                        <h3>
                                             <a href="/{{ classify.slug }}/item/{{ compare.first.slug }}">{{ compare.first.name }}</a>
-                                        </h2>
+                                        </h3>
                                         <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a>
                                         </p>
                                     </div>
                                 </div>
                             </td>
-                            <td width="40%" class="img-fit">
+                            <td width="33.3333%" class="img-fit">
                                 <div class="row thing-wrap">
                                     <div class="columns small-12 medium-4">
                                         <img src="{{ compare.second.photos.featured.path.crop.400x400 }}"
                                              alt="{{ compare.second.name }}">
                                     </div>
                                     <div class="columns small-12 medium-8">
-                                        <h2>
+                                        <h3>
                                             <a href="/{{ classify.slug }}/item/{{ compare.second.slug }}">{{ compare.second.name }}</a>
-                                        </h2>
+                                        </h3>
                                         <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a>
                                         </p>
                                     </div>
                                 </div>
                             </td>
-                        </tr>{% get_max_level2 data=compare.data.data max_level=0 as max_level%}
-                        {% for data in compare.data.data %}
-                            <tr>
-                                <th colspan="{{ max_level }}">
-                                    <span>{{ data.name }}</span>
-                                </th>
-                            </tr>
-                            {% include "layout/row_data.html" with data=data max_level=max_level %}
-                        {% endfor %}
+                        </tr>
+                        <tr>
+                            <th colspan="4">Description</th>
+                            <td>{{ compare.first.description }}</td>
+                            <td>{{ compare.second.description }}</td>
+                        </tr>
+                        <tr><th colspan="2" rowspan="4">Vitamin</th></tr>
+                        <tr><th colspan="1" rowspan="2">Vitamin A</th></tr>
+                        <tr><th colspan="1">Vitamin A1</th></tr>
+                        <tr><th colspan="1">Vitamin B</th></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row mt-20">
+            <div class="row mt-30">
                 <div class="columns small-12 medium-5">
                     <img src="//lh5.ggpht.com/CztHBMfmRKhSv-_up3GCkK5R5M0TCm1czCVkVBwB0urvaHUVCEh6YtpS7DY3mcZuwC2SzX9A3w=w338"
-                         height="auto" alt=""></div>
-                <div class="row columns small-12 medium-7 compare-list small-up-2 medium-up-3">
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
+                         height="auto" alt="">
+                </div>
+                <div class="mt-20 row columns small-12 medium-7 compare-list small-up-2 medium-up-3">
+                    {% for compare in compare.related %}
+                        <div class="float-left column column-block">
+                            <div class="compare-card">
+                                <div class="small-12 compare-card-top">
+                            <span class="model-icon">
+                                <img src="{{ compare.first.photos.featured.path.crop.64x64 }}">
+                            </span>
+                                    <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                                    <span class="model-icon">
+                                <img src="{{ compare.second.photos.featured.path.crop.64x64 }}">
+                            </span>
+                                </div>
+                                <div class="small-12 compare-card-middle">
+                                    <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">{{ compare.first }}
+                                        and {{ compare.second }}</a>
+                                </div>
+                                <div class="small-12 compare-card-bottom">
+                                    <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">See
+                                        compare</a>
+                                </div>
                             </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-              <span class="model-icon"><img
-                      src="http://compargram.com/media/__sized__/images/d204b7f988da4737a0d32b62a693ca49-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/banana-and-watermelon">Banana
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/banana-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="float-left column column-block">
-                        <div class="compare-card">
-                            <div class="small-12 compare-card-top">
-                <span class="model-icon"><img
-                        src="http://compargram.com/media/__sized__/images/2a9109f1fff145ce867c098badced022-crop-c0-5__0-5-400x400-70.jpg"></span>
-                                <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                <span class="model-icon"><img
-                                        src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"></span>
-                            </div>
-                            <div class="small-12 compare-card-middle">
-                                <a href="/food/cucumber-and-watermelon">Cucumber
-                                    and Watermelon</a>
-                            </div>
-                            <div class="small-12 compare-card-bottom">
-                                <a href="/food/cucumber-and-watermelon">See compare</a>
-                            </div>
-                        </div>
-                    </div>
+                        </div>{% endfor %}
                 </div>
             </div>
-            <h2 class="text-center text-success">Compare Anything</h2>
-            <div id="compare-box">
-                <compare-box></compare-box>
-            </div>
+            <h2 class="mt-30 text-center text-success">Compare Anything</h2>
+            <section id="compare-box" class="compare-search">
+            </section>
         </div>
     </section>
 {% endblock %}
+rowspan = so phan tu con + 1
+colspan = 1 || max deep - so phan tu con

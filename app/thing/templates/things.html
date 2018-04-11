@@ -2,32 +2,82 @@
 {% block breadcrumb %}
     <li>Home</li>{% endblock %}
 {% block title %}{{ item.name }} - {{ classify.name }}{% endblock %}
-{% block description %}Compargram is a web application for comparison. We want to give you specific, accurate
-    information to help you make the most informed choices about: vehicle, food, service...{% endblock %}
+{% block description %}{{ item.description }}{% endblock %}
 {% block content %}
     <div class="row mt-20">
-    <div class="columns small-12 medium-4">
-      <h2>{{ item.name }}</h2>
-      <p>{{ item.description }}</p>
-      <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a></p>
+        <div class="columns small-12 medium-6">
+            <h2>{{ item.name }}</h2>
+            <div id="model_gallery">
+                <swiper :options="swiperOption">
+                    <swiper-slide class="slide-1">
+                        <img
+                                src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"/>
+                    </swiper-slide>
+                    <swiper-slide class="slide-1">
+                        <img
+                                src="http://compargram.com/media/__sized__/images/2018/2/28/e5ded632f3344a769a449532478fed97-crop-c0-5__0-5-400x400-70.jpg"/>
+                    </swiper-slide>
+                    <swiper-slide class="slide-1">
+                        <img
+                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
+                    </swiper-slide>
+                    <swiper-slide class="slide-1">
+                        <img
+                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
+                    </swiper-slide>
+                    <swiper-slide class="slide-1">
+                        <img
+                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
+                    </swiper-slide>
+                    <div class="swiper-pagination" slot="pagination"></div>
+                    <div class="swiper-button-prev" slot="button-prev"></div>
+                    <div class="swiper-button-next" slot="button-next"></div>
+                </swiper>
+            </div>
+            <p>{{ item.description }}</p>
+            <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a></p>
+            <h2>Apple compare</h2>
+            <div class="row small-up-2 small-12 compare-list">{% for compare in item.related_compare %}
+                <div class="column column-block">
+                    <div class="compare-card">
+                        <div class="small-12 compare-card-top">
+                                <span class="model-icon">
+                                    <img src="{{ compare.first.photos.featured.path.crop.64x64 }}">
+                                </span>
+                            <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                            <span class="model-icon">
+                                    <img src="{{ compare.second.photos.featured.path.crop.64x64 }}">
+                                </span>
+                        </div>
+                        <div class="small-12 compare-card-middle">
+                            <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">{{ compare.first }}
+                                and {{ compare.second }}</a>
+                        </div>
+                        <div class="small-12 compare-card-bottom">
+                            <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">See
+                                compare</a>
+                        </div>
+                    </div>
+                </div>{% endfor %}
+            </div>
+        </div>
+        <div class="columns small-12 medium-6 compare-list">
+            <table>
+                <thead>
+                <tr>
+                    <th width="30%">Field</th>
+                    <th width="70%">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in item.data %}
+                    <tr>
+                        <th class="text-left">{{ data.name }}</th>
+                        <td>{% get_data_value data=data order="none" %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="columns small-12 medium-8 compare-list">
-      <table>
-        <thead>
-        <tr>
-          <th width="30%">Field</th>
-          <th width="70%">Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for data in item.data %}
-        <tr>
-          <th class="text-left">{{ data.name }}</th>
-          <td>{% get_data_value data=data order="none" %}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
 {% endblock %}

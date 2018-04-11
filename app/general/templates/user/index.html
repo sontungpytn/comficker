@@ -6,11 +6,11 @@
 {% load i18n %}
 {% load static %}
 {% block title %}Members{% endblock %}
-{% block content_header %}<h1 class="page-title">Members</h1>{% endblock %}
+{% block content_header %}<h1 class="page-title text-center">Members</h1>{% endblock %}
 {% block content %}
-	<section class="media row">
-		<div class="list-model row small-up-2 medium-up-3 large-up-3 small-12">{% for user in users %}
-			<div class="column column-block model">
+	<section class="media">
+		<div class="columns list-model row small-up-2 medium-up-5 small-12">{% for user in users %}
+			<div class="columns column-block model">
 				<div class="featured-image">
 					<img src="{% if user.profile.image is None %}{% static 'img/avatar.png' %}" alt="{{ user }}{% else %}{{ user.profile.image.crop.175x175 }}{% endif %}">
 				</div>
