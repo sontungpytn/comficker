@@ -22,7 +22,15 @@ class ThingViewSet(viewsets.ModelViewSet):
     search_fields = ['name', ]
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = self.models.objects.all()
+        if self.request.GET.get("classify"):
+            classify_slug = self.request.GET.get("classify")
+            classify = models.Classify.objects.filter(slug=classify_slug).first()
+            queryset_list = self.models.objects.filter(classify=classify)
+            if classify.allow_foreign_compare:
+                for data in classify.parents():
+                    queryset_list = list(chain(queryset_list, self.models.objects.filter(classify=data)))
+        else:
+            queryset_list = self.models.objects.all()
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(

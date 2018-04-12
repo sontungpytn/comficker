@@ -53,10 +53,6 @@ def classifies():
     return Classify.objects.all().filter(parent__isnull=True).order_by('id')
 
 
-def get_deep(dict_data, deep):
-    if type(dict_data.get('data')) is list:
-        if len(dict_data.get('data')) == 0:
-            deep = deep + 1
-        for temp in dict_data.get('data'):
-            deep = get_deep(temp, deep)
-    return deep
+@register.simple_tag
+def subtract(num1, num2):
+    return num1 - num2

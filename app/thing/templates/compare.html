@@ -12,7 +12,7 @@
                     <table id="vitamin" class="table table-hover table-border compare-table">
                         <tbody>
                         <tr>
-                            <th width="33.3333%" colspan="4">
+                            <th width="33.3333%" colspan="{% subtract num1=compare.data.0.deep num2=2 %}">
                                 <p></p>
                             </th>
                             <td width="33.3333%" class="img-fit">
@@ -47,14 +47,24 @@
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="4">Description</th>
+                            <th colspan="{% subtract num1=compare.data.0.deep num2=2 %}">Description</th>
                             <td>{{ compare.first.description }}</td>
                             <td>{{ compare.second.description }}</td>
                         </tr>
-                        <tr><th colspan="2" rowspan="4">Vitamin</th></tr>
-                        <tr><th colspan="1" rowspan="2">Vitamin A</th></tr>
-                        <tr><th colspan="1">Vitamin A1</th></tr>
-                        <tr><th colspan="1">Vitamin B</th></tr>
+                        {% for data in compare.data %}
+                            {% if data.level == 1 %}
+                                <tr><th colspan="{{ compare.data.0.deep }}">{{ data.name }}</th></tr>
+                            {% endif %}
+                            {% if data.level > 1 %}
+                                <tr>
+                                    <th colspan="{{ data.col_span }}" rowspan="{{ data.row_span }}">{{ data.name }}</th>
+                                    {% if data.active %}
+                                        <td>{% get_data_value data=data order="first" %}</td>
+                                        <td>{% get_data_value data=data order="second" %}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -95,5 +105,5 @@
         </div>
     </section>
 {% endblock %}
-rowspan = so phan tu con + 1
-colspan = 1 || max deep - so phan tu con
+rowspan = 1 +
+colspan = 1 || outer-inner

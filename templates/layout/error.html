@@ -1,0 +1,15 @@
+{% extends "layout/base.html" %}{% load custom_tags %}
+{% block breadcrumb %}
+    <li>Home</li>{% endblock %}
+{% block title %}Something wrong!{% endblock %}
+{% block description %}This is error page{% endblock %}
+{% block content %}
+    <div class="row mt-20 text-center">
+        <div class="columns small-12">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="columns small-12">
+            <p>{{ message }}</p>
+        </div>
+    </div>
+{% endblock %}
