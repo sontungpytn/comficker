@@ -18,7 +18,8 @@ def get_data_value(data, order):
         output = data.get("second")
     else:
         output = data
-    if data.get('type') == "list":
+
+    if output.get('type') == "list":
         data = ""
         for data_temp in output.get('data'):
             data = data + data_temp + ", "
