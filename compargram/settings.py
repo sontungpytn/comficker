@@ -27,7 +27,7 @@ DEBUG = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = ['128.199.179.174', '127.0.0.1']
+ALLOWED_HOSTS = ['128.199.179.174', '127.0.0.1', 'compargram.com']
 
 # Application definition
 
@@ -109,7 +109,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'compargram',
-        'USER': 'comficker',
+        'USER': 'lam',
         'PASSWORD': 'hoanganhlamno1',
         'HOST': 'localhost',
         'PORT': '5432',
