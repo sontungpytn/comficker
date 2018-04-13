@@ -19,7 +19,7 @@
             </div>
             <p>{{ item.description }}</p>
             <p><a class="custom-button buy-amz" href=""><i class="fa fa-amazon"></i> Buy Now</a></p>
-            <h2>Apple compare</h2>
+            <h2>{{ item.name }} compare</h2>
             <div class="row small-up-2 small-12 compare-list">{% for compare in item.related_compare %}
                 <div class="column column-block">
                     <div class="compare-card">
