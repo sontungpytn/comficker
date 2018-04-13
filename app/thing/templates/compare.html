@@ -51,8 +51,8 @@
                         <tr><th colspan="2"><h3>{{ data.name }}</h3></th></tr>{% endif %}{% if data.level > 1 %}
                         <tr><th colspan="2" rowspan="1">{{ data.name }}</th></tr>
                         <tr>{% if data.active %}
-                            <td class="text-center">{% get_data_value data=data order="first" %}</td>
-                            <td class="text-center">{% get_data_value data=data order="second" %}</td>{% endif %}
+                            <td class="text-right">{% get_data_value data=data order="first" %}</td>
+                            <td class="text-left">{% get_data_value data=data order="second" %}</td>{% endif %}
                         </tr>{% endif %}{% endfor %}
                         </tbody>
                     </table>
