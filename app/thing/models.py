@@ -95,7 +95,7 @@ class Thing(models.Model):
         return self.name
 
     def related_compare(self):
-        return Compare.objects.filter(Q(first=self) | Q(second=self))[:6]
+        return Compare.objects.filter(Q(first=self) | Q(second=self))
 
     def get_absolute_url(self):
         return reverse('thing:thing_detail',
@@ -116,7 +116,7 @@ class Compare(models.Model):
 
     def related(self):
         return Compare.objects.filter(
-            Q(first=self.first) | Q(first=self.second) | Q(second=self.first) | Q(second=self.second))
+            Q(first=self.first) | Q(first=self.second) | Q(second=self.first) | Q(second=self.second))[:6]
 
     def get_absolute_url(self):
         return reverse('thing:compare',
