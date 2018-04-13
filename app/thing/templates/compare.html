@@ -12,9 +12,6 @@
                     <table id="vitamin" class="table table-hover table-border compare-table">
                         <tbody>
                         <tr>
-                            <th width="33.3333%" colspan="{% subtract num1=compare.data.0.deep num2=2 %}">
-                                <p></p>
-                            </th>
                             <td width="33.3333%" class="img-fit">
                                 <div class="row thing-wrap">
                                     <div class="columns small-12 medium-4">
@@ -46,25 +43,17 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr><th colspan="2">Description</th></tr>
                         <tr>
-                            <th colspan="{% subtract num1=compare.data.0.deep num2=2 %}">Description</th>
                             <td>{{ compare.first.description }}</td>
                             <td>{{ compare.second.description }}</td>
-                        </tr>
-                        {% for data in compare.data %}
-                            {% if data.level == 1 %}
-                                <tr><th colspan="{{ compare.data.0.deep }}">{{ data.name }}</th></tr>
-                            {% endif %}
-                            {% if data.level > 1 %}
-                                <tr>
-                                    <th colspan="{{ data.col_span }}" rowspan="{{ data.row_span }}">{{ data.name }}</th>
-                                    {% if data.active %}
-                                        <td>{% get_data_value data=data order="first" %}</td>
-                                        <td>{% get_data_value data=data order="second" %}</td>
-                                    {% endif %}
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
+                        </tr>{% for data in compare.data %}{% if data.level == 1 %}
+                        <tr><th colspan="2"><h3>{{ data.name }}</h3></th></tr>{% endif %}{% if data.level > 1 %}
+                        <tr><th colspan="2" rowspan="1">{{ data.name }}</th></tr>
+                        <tr>{% if data.active %}
+                            <td class="text-center">{% get_data_value data=data order="first" %}</td>
+                            <td class="text-center">{% get_data_value data=data order="second" %}</td>{% endif %}
+                        </tr>{% endif %}{% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -74,8 +63,7 @@
                     <img src="//lh5.ggpht.com/CztHBMfmRKhSv-_up3GCkK5R5M0TCm1czCVkVBwB0urvaHUVCEh6YtpS7DY3mcZuwC2SzX9A3w=w338"
                          height="auto" alt="">
                 </div>
-                <div class="mt-20 row columns small-12 medium-7 compare-list small-up-2 medium-up-3">
-                    {% for compare in compare.related %}
+                <div class="mt-20 row columns small-12 medium-7 compare-list small-up-2 medium-up-3">{% for compare in compare.related %}
                         <div class="float-left column column-block">
                             <div class="compare-card">
                                 <div class="small-12 compare-card-top">
@@ -105,5 +93,17 @@
         </div>
     </section>
 {% endblock %}
-rowspan = 1 +
-colspan = 1 || outer-inner
+{% for data in compare.data %}
+{% if data.level == 1 %}
+<tr><th colspan="{{ compare.data.0.deep }}">{{ data.name }}</th></tr>
+{% endif %}
+{% if data.level > 1 %}
+<tr>
+<th colspan="{{ data.col_span }}" rowspan="{{ data.row_span }}">{{ data.name }}</th>
+{% if data.active %}
+<td>{% get_data_value data=data order="first" %}</td>
+<td>{% get_data_value data=data order="second" %}</td>
+{% endif %}
+</tr>
+{% endif %}
+{% endfor %}
