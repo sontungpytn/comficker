@@ -10,6 +10,13 @@
         </h1>
         <section id="compare-box" class="compare-search">
         </section>
+        <section class="row">
+            <div class="column button-group text-center">
+                {% for class in classify.child %}
+                <a class="label alert clickable" href="/{{ class.slug }}">{{ class.name }}</a>
+                {% endfor %}
+            </div>
+        </section>
         <section>
             <h2 class="text-center">New compare</h2>
             <div class="row small-up-2 medium-up-3 large-up-4 small-12 compare-list">{% for compare in comparison %}
