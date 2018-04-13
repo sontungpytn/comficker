@@ -3,8 +3,8 @@
         <a class="custom-button pagination-previous" href="?page={{ pages.previous_page_number }}">previous</a>
     </li>{% else %}
     <li class="custom-button pagination-previous disabled">previous</li>{% endif %}{% for i in pages.paginator.page_range %}{% if pages.number == i %}
-    <li class="current">
-        <span class="custom-button">{{ i }}</span>
+    <li class="custom-button current">
+        <span>{{ i }}</span>
     </li>{% else %}
     <li>
         <a class="custom-button" href="?page={{ i }}">{{ i }}</a>
