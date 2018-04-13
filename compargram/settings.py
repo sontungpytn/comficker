@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'app.general.apps.GeneralConfig',
     'app.media.apps.MediaConfig',
     'app.utils',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'django.contrib.sitemaps',
+    'robots',
 ]
 
 # Middleware
