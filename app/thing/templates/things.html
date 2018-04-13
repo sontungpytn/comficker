@@ -8,27 +8,10 @@
         <div class="columns small-12 medium-6">
             <h1>{{ item.name }}</h1>
             <div id="model_gallery">
-                <swiper :options="swiperOption">
+                <swiper :options="swiperOption">{% for gallery in item.photos.list_images %}
                     <swiper-slide class="slide-1">
-                        <img
-                                src="http://compargram.com/media/__sized__/images/2018/2/28/6d20f3865bdb4c399dde7e0d9e91d13a-crop-c0-5__0-5-400x400-70.jpg"/>
-                    </swiper-slide>
-                    <swiper-slide class="slide-1">
-                        <img
-                                src="http://compargram.com/media/__sized__/images/2018/2/28/e5ded632f3344a769a449532478fed97-crop-c0-5__0-5-400x400-70.jpg"/>
-                    </swiper-slide>
-                    <swiper-slide class="slide-1">
-                        <img
-                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
-                    </swiper-slide>
-                    <swiper-slide class="slide-1">
-                        <img
-                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
-                    </swiper-slide>
-                    <swiper-slide class="slide-1">
-                        <img
-                                src="http://compargram.com/media/__sized__/images/2018/2/28/5c14afc3d96542f3885f127436095252-crop-c0-5__0-5-400x400-70.jpg"/>
-                    </swiper-slide>
+                        <img src="{{ gallery.image.path.crop.400x400 }}"/>
+                    </swiper-slide>{% endfor %}
                     <div class="swiper-pagination" slot="pagination"></div>
                     <div class="swiper-button-prev" slot="button-prev"></div>
                     <div class="swiper-button-next" slot="button-next"></div>
