@@ -50,6 +50,7 @@ router.register(r'classify', thing_api_views.ClassifyFieldViewSet)
 
 urlpatterns = [
     url(r'^test/$', views.test, name='test'),
+    url(r'^robots\.txt', include('robots.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('sitemap-compare.xml', sitemap, {'sitemaps': {'blog': GenericSitemap(map_compare, priority=0.6)}},
          name='sitemap_compare'),
