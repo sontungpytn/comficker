@@ -22,19 +22,22 @@ class ThingViewSet(viewsets.ModelViewSet):
     search_fields = ['name', ]
 
     def get_queryset(self, *args, **kwargs):
-        if self.request.GET.get("classify"):
-            classify_slug = self.request.GET.get("classify")
+        query = self.request.GET.get("q")
+        classify_slug = self.request.GET.get("classify")
+
+        if classify_slug:
             classify = models.Classify.objects.filter(slug=classify_slug).first()
-            queryset_list = self.models.objects.filter(classify=classify)
             if classify.allow_foreign_compare:
-                for data in classify.parents():
-                    queryset_list = list(chain(queryset_list, self.models.objects.filter(classify=data)))
+                queryset_list = self.models.objects.filter(Q(classify=classify) | Q(classify__in=classify.parents()))
+            else:
+                queryset_list = self.models.objects.filter(classify=classify)
         else:
             queryset_list = self.models.objects.all()
-        query = self.request.GET.get("q")
+
         if query:
             queryset_list = queryset_list.filter(
                 Q(name__icontains=query)).distinct()
+
         return queryset_list
 
     def create(self, request, *args, **kwargs):
@@ -45,7 +48,7 @@ class ThingViewSet(viewsets.ModelViewSet):
         user = User.objects.get(pk=1)
         try:
             if photos:
-                serializer.save(slug=slugify(self.request.POST['name']), classify=classify, creator=user,photos=photos)
+                serializer.save(slug=slugify(self.request.POST['name']), classify=classify, creator=user, photos=photos)
             else:
                 serializer.save(slug=slugify(self.request.POST['name']), classify=classify,
                                 creator=user)

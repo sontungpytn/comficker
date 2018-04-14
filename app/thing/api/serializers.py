@@ -12,22 +12,41 @@ class GallerySerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'title', 'featured']
 
 
+class SimpleFieldSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = models.Field
+        fields = ('id', 'name', 'slug')
+
+
 class SimpleClassifySerializer(serializers.HyperlinkedModelSerializer):
+    field = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Classify
-        fields = ('id', 'name', 'slug', 'description')
+        fields = ('id', 'name', 'slug', 'description', 'field')
+
+    def get_field(self, obj):
+        return SimpleFieldSerializer(obj.fields(), many=True).data
 
 
 class ClassifySerializer(serializers.HyperlinkedModelSerializer):
     master_parent = serializers.SerializerMethodField()
+    parent = serializers.SerializerMethodField()
+    field = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Classify
-        fields = ('id', 'name', 'slug', 'description', 'allow_foreign_compare', 'master_parent')
+        fields = ('id', 'name', 'slug', 'description', 'allow_foreign_compare', 'master_parent', 'parent', 'field')
 
     def get_master_parent(self, obj):
         return SimpleClassifySerializer(obj.master_parent()).data
+
+    def get_parent(self, obj):
+        return SimpleClassifySerializer(obj.parents(), many=True).data
+
+    def get_field(self, obj):
+        return SimpleFieldSerializer(obj.fields(), many=True).data
 
 
 class ThingSerializer(serializers.HyperlinkedModelSerializer):
