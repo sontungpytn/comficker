@@ -66,7 +66,7 @@ class Field(models.Model):
     parent = models.ForeignKey("self", related_name='parent_field', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.classify.name + " - " + self.name
 
     def childs(self):
         return Field.objects.filter(parent=self)
