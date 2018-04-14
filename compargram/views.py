@@ -3,8 +3,7 @@ from app.thing.models import Compare
 
 
 def welcome(request):
-    new_compare = Compare.objects.all().order_by('-id')[:12]
-    return render(request, 'welcome.html', {'comparison': new_compare})
+    return render(request, 'welcome.html', {})
 
 
 def error_404(request):
