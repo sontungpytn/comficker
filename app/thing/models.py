@@ -58,7 +58,7 @@ class Classify(models.Model):
         return Thing.objects.filter(classify=self).order_by('name')
 
     def compare_list(self):
-        return Compare.objects.filter(classify=self)[:2]
+        return Compare.objects.filter(classify=self).order_by('-id')[:2]
 
     def get_absolute_url(self):
         return reverse('thing:thing_show', kwargs={'slug': self.slug})
