@@ -63,28 +63,30 @@
                     <img src="//lh5.ggpht.com/CztHBMfmRKhSv-_up3GCkK5R5M0TCm1czCVkVBwB0urvaHUVCEh6YtpS7DY3mcZuwC2SzX9A3w=w338"
                          height="auto" alt="">
                 </div>
-                <div class="mt-20 row columns small-12 medium-7 compare-list small-up-2 medium-up-3">{% for compare in compare.related %}
-                        <div class="float-left column column-block">
-                            <div class="compare-card">
-                                <div class="small-12 compare-card-top">
-                            <span class="model-icon">
-                                <img src="{{ compare.first.photos.featured.path.crop.64x64 }}">
-                            </span>
-                                    <span><i class="fa fa-compress" aria-hidden="true"></i></span>
-                                    <span class="model-icon">
-                                <img src="{{ compare.second.photos.featured.path.crop.64x64 }}">
-                            </span>
+                <div class="columns small-12 medium-7">
+                    <div class="mt-20 row compare-list small-up-2 medium-up-3">{% for compare in compare.related %}
+                            <div class="columns column-block">
+                                <div class="compare-card">
+                                    <div class="small-12 compare-card-top">
+                                <span class="model-icon">
+                                    <img src="{{ compare.first.photos.featured.path.crop.64x64 }}">
+                                </span>
+                                        <span><i class="fa fa-compress" aria-hidden="true"></i></span>
+                                        <span class="model-icon">
+                                    <img src="{{ compare.second.photos.featured.path.crop.64x64 }}">
+                                </span>
+                                    </div>
+                                    <div class="small-12 compare-card-middle">
+                                        <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">{{ compare.first }}
+                                            and {{ compare.second }}</a>
+                                    </div>
+                                    <div class="small-12 compare-card-bottom">
+                                        <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">See
+                                            compare</a>
+                                    </div>
                                 </div>
-                                <div class="small-12 compare-card-middle">
-                                    <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">{{ compare.first }}
-                                        and {{ compare.second }}</a>
-                                </div>
-                                <div class="small-12 compare-card-bottom">
-                                    <a href="/{{ classify.master_parent.slug }}/{{ compare.first.slug }}-and-{{ compare.second.slug }}">See
-                                        compare</a>
-                                </div>
-                            </div>
-                        </div>{% endfor %}
+                            </div>{% endfor %}
+                    </div>
                 </div>
             </div>
             <h2 class="mt-30 text-center text-success">Compare Anything</h2>
