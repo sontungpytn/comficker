@@ -59,7 +59,7 @@ class Classify(models.Model):
 
 
 class Field(models.Model):
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=60)
     slug = models.CharField(max_length=60)
     description = models.CharField(max_length=500, blank=True)
     classify = models.ForeignKey(Classify, on_delete=models.CASCADE, related_name='field_classify')
