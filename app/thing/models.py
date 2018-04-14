@@ -41,10 +41,17 @@ class Classify(models.Model):
                 return parent
         return self
 
-    def fields(self):
+    def field_child(self):
         data = []
         for field in Field.objects.filter(classify=self).order_by('name'):
             data.append(field)
+        return data
+
+    def fields(self):
+        data = []
+        for field in Field.objects.filter(classify=self).order_by('name'):
+            if field.parent is None:
+                data.append(field)
         return data
 
     def things(self):

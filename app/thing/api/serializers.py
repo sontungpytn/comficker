@@ -27,7 +27,7 @@ class SimpleClassifySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'name', 'slug', 'description', 'field')
 
     def get_field(self, obj):
-        return SimpleFieldSerializer(obj.fields(), many=True).data
+        return SimpleFieldSerializer(obj.field_child(), many=True).data
 
 
 class ClassifySerializer(serializers.HyperlinkedModelSerializer):
@@ -46,7 +46,7 @@ class ClassifySerializer(serializers.HyperlinkedModelSerializer):
         return SimpleClassifySerializer(obj.parents(), many=True).data
 
     def get_field(self, obj):
-        return SimpleFieldSerializer(obj.fields(), many=True).data
+        return SimpleFieldSerializer(obj.field_child(), many=True).data
 
 
 class ThingSerializer(serializers.HyperlinkedModelSerializer):
