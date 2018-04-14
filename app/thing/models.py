@@ -60,7 +60,7 @@ class Classify(models.Model):
 
 class Field(models.Model):
     name = models.CharField(max_length=20, unique=True)
-    slug = models.CharField(max_length=60, unique=True)
+    slug = models.CharField(max_length=60)
     description = models.CharField(max_length=500, blank=True)
     classify = models.ForeignKey(Classify, on_delete=models.CASCADE, related_name='field_classify')
     parent = models.ForeignKey("self", related_name='parent_field', on_delete=models.SET_NULL, blank=True, null=True)
